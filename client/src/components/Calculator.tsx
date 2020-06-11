@@ -40,7 +40,7 @@ const Calculator = () => {
     <Card
       bg="dark"
       className="mt-4 p-4"
-      style={{ width: "27rem", maxWidth: "100%" }}
+      style={{ width: "32rem", maxWidth: "100%" }}
     >
       <Card.Title>WACC Calculator</Card.Title>
       <Card.Body>
@@ -52,7 +52,7 @@ const Calculator = () => {
             <Col sm={4}>
               <Form.Control
                 size="sm"
-                placeholder={"" + defaultInput.E}
+                placeholder={"" + defaultInput.E.toLocaleString()}
                 required
                 onChange={(e: any) =>
                   handleChange(
@@ -82,7 +82,9 @@ const Calculator = () => {
                 }
               ></Form.Control>
             </Col>
-            <Form.Text muted>Cost of Equity</Form.Text>
+            <Col sm={4}>
+              <Form.Text muted>Cost of Equity</Form.Text>
+            </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalDebt">
             <Form.Label column="sm" sm={3}>
@@ -91,7 +93,7 @@ const Calculator = () => {
             <Col sm={4}>
               <Form.Control
                 size="sm"
-                placeholder={"" + defaultInput.D}
+                placeholder={"" + defaultInput.D.toLocaleString()}
                 required
                 onChange={(e: any) =>
                   handleChange(
@@ -121,7 +123,9 @@ const Calculator = () => {
                 }
               ></Form.Control>
             </Col>
-            <Form.Text muted>Cost of Debt</Form.Text>
+            <Col sm={4}>
+              <Form.Text muted>Cost of Debt</Form.Text>
+            </Col>
           </Form.Group>
           <Form.Group as={Row} controlId="formHorizontalRd">
             <Form.Label column="sm" sm={3}>
@@ -141,10 +145,12 @@ const Calculator = () => {
                 }
               ></Form.Control>
             </Col>
-            <Form.Text muted>Corporate Tax Rate</Form.Text>
+            <Col sm={4}>
+              <Form.Text muted>Corporate Tax Rate</Form.Text>
+            </Col>
           </Form.Group>
         </Form>
-        WACC: {WACC}
+        WACC: {WACC.toLocaleString()}
       </Card.Body>
     </Card>
   );
