@@ -39,11 +39,11 @@ const Calculator = () => {
   return (
     <Card
       bg="dark"
-      className="mt-4 p-4"
+      className="mt-4"
       style={{ width: "32rem", maxWidth: "100%" }}
     >
-      <Card.Title>WACC Calculator</Card.Title>
-      <Card.Body>
+      <Card.Title className="p-4">WACC Calculator</Card.Title>
+      <Card.Body className="p-4">
         <Form>
           <Form.Group as={Row} controlId="formHorizontalEquity">
             <Form.Label column="sm" sm={3}>
@@ -150,8 +150,12 @@ const Calculator = () => {
             </Col>
           </Form.Group>
         </Form>
-        WACC: {WACC.toLocaleString()}
       </Card.Body>
+      <Card.Footer>
+        <Card.Text>
+          WACC <h2>{WACC.toLocaleString()}</h2>
+        </Card.Text>
+      </Card.Footer>
     </Card>
   );
 };
