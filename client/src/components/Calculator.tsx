@@ -37,126 +37,130 @@ const Calculator = () => {
     });
   };
   return (
-    <Card
-      bg="dark"
-      className="mt-4"
-      style={{ width: "32rem", maxWidth: "100%" }}
-    >
-      <Card.Title className="p-4">WACC Calculator</Card.Title>
-      <Card.Body className="p-4">
-        <Form>
-          <Form.Group as={Row} controlId="formHorizontalEquity">
-            <Form.Label column="sm" sm={3}>
-              Equity
-            </Form.Label>
-            <Col sm={4}>
-              <Form.Control
-                size="sm"
-                placeholder={"" + defaultInput.E.toLocaleString()}
-                required
-                onChange={(e: any) =>
-                  handleChange(
-                    e.target.value
-                      ? { E: +e.target.value }
-                      : { E: defaultInput.E }
-                  )
-                }
-              ></Form.Control>
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalRe">
-            <Form.Label column="sm" sm={3}>
-              Re
-            </Form.Label>
-            <Col sm={4}>
-              <Form.Control
-                size="sm"
-                placeholder={"" + defaultInput.Re}
-                required
-                onChange={(e: any) =>
-                  handleChange(
-                    e.target.value
-                      ? { Re: +e.target.value }
-                      : { Re: defaultInput.Re }
-                  )
-                }
-              ></Form.Control>
-            </Col>
-            <Col sm={4}>
-              <Form.Text muted>Cost of Equity</Form.Text>
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalDebt">
-            <Form.Label column="sm" sm={3}>
-              Debt
-            </Form.Label>
-            <Col sm={4}>
-              <Form.Control
-                size="sm"
-                placeholder={"" + defaultInput.D.toLocaleString()}
-                required
-                onChange={(e: any) =>
-                  handleChange(
-                    e.target.value
-                      ? { D: +e.target.value }
-                      : { D: defaultInput.D }
-                  )
-                }
-              ></Form.Control>
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalRd">
-            <Form.Label column="sm" sm={3}>
-              Rd
-            </Form.Label>
-            <Col sm={4}>
-              <Form.Control
-                size="sm"
-                placeholder={"" + defaultInput.Rd}
-                required
-                onChange={(e: any) =>
-                  handleChange(
-                    e.target.value
-                      ? { Rd: +e.target.value }
-                      : { Rd: defaultInput.Rd }
-                  )
-                }
-              ></Form.Control>
-            </Col>
-            <Col sm={4}>
-              <Form.Text muted>Cost of Debt</Form.Text>
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formHorizontalRd">
-            <Form.Label column="sm" sm={3}>
-              Tc
-            </Form.Label>
-            <Col sm={4}>
-              <Form.Control
-                size="sm"
-                placeholder={"" + defaultInput.Tc}
-                required
-                onChange={(e: any) =>
-                  handleChange(
-                    e.target.value
-                      ? { Tc: +e.target.value }
-                      : { Tc: defaultInput.Tc }
-                  )
-                }
-              ></Form.Control>
-            </Col>
-            <Col sm={4}>
-              <Form.Text muted>Corporate Tax Rate</Form.Text>
-            </Col>
-          </Form.Group>
-        </Form>
-      </Card.Body>
-      <Card.Footer>
-        <Card.Text>
-          WACC <h2>{WACC.toLocaleString()}</h2>
-        </Card.Text>
-      </Card.Footer>
-    </Card>
+    <Row className="justify-content-md-center">
+      <Card
+        bg="dark"
+        className="mt-4"
+        style={{ width: "32rem", maxWidth: "100%" }}
+      >
+        <Card.Header>
+          <Card.Title className="p-4">WACC Calculator</Card.Title>
+        </Card.Header>
+        <Card.Body className="p-4">
+          <Form>
+            <Form.Group as={Row} controlId="formHorizontalEquity">
+              <Form.Label column="sm" sm={3}>
+                Equity
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
+                  size="sm"
+                  placeholder={"" + defaultInput.E.toLocaleString()}
+                  required
+                  onChange={(e: any) =>
+                    handleChange(
+                      e.target.value
+                        ? { E: +e.target.value }
+                        : { E: defaultInput.E }
+                    )
+                  }
+                ></Form.Control>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formHorizontalRe">
+              <Form.Label column="sm" sm={3}>
+                Re
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
+                  size="sm"
+                  placeholder={"" + defaultInput.Re}
+                  required
+                  onChange={(e: any) =>
+                    handleChange(
+                      e.target.value
+                        ? { Re: +e.target.value }
+                        : { Re: defaultInput.Re }
+                    )
+                  }
+                ></Form.Control>
+              </Col>
+              <Col sm={4}>
+                <Form.Text muted>Cost of Equity</Form.Text>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formHorizontalDebt">
+              <Form.Label column="sm" sm={3}>
+                Debt
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
+                  size="sm"
+                  placeholder={"" + defaultInput.D.toLocaleString()}
+                  required
+                  onChange={(e: any) =>
+                    handleChange(
+                      e.target.value
+                        ? { D: +e.target.value }
+                        : { D: defaultInput.D }
+                    )
+                  }
+                ></Form.Control>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formHorizontalRd">
+              <Form.Label column="sm" sm={3}>
+                Rd
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
+                  size="sm"
+                  placeholder={"" + defaultInput.Rd}
+                  required
+                  onChange={(e: any) =>
+                    handleChange(
+                      e.target.value
+                        ? { Rd: +e.target.value }
+                        : { Rd: defaultInput.Rd }
+                    )
+                  }
+                ></Form.Control>
+              </Col>
+              <Col sm={4}>
+                <Form.Text muted>Cost of Debt</Form.Text>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} controlId="formHorizontalRd">
+              <Form.Label column="sm" sm={3}>
+                Tc
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
+                  size="sm"
+                  placeholder={"" + defaultInput.Tc}
+                  required
+                  onChange={(e: any) =>
+                    handleChange(
+                      e.target.value
+                        ? { Tc: +e.target.value }
+                        : { Tc: defaultInput.Tc }
+                    )
+                  }
+                ></Form.Control>
+              </Col>
+              <Col sm={4}>
+                <Form.Text muted>Corporate Tax Rate</Form.Text>
+              </Col>
+            </Form.Group>
+          </Form>
+        </Card.Body>
+        <Card.Footer>
+          <Card.Text>
+            WACC <h2>{WACC.toLocaleString()}</h2>
+          </Card.Text>
+        </Card.Footer>
+      </Card>
+    </Row>
   );
 };
 

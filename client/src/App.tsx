@@ -2,15 +2,15 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 
 import NavBar from "./components/NavBar";
-import Welcome from "./components/Welcome";
 import Calculator from "./components/Calculator";
+import Banner from "./components/Banner";
 
 function App() {
   return (
     <>
       <NavBar />
+      <Banner />
       <Container className="p-4">
-        <Welcome />
         <Calculator />
       </Container>
     </>
