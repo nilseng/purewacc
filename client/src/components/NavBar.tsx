@@ -40,7 +40,7 @@ const NavBar = () => {
           )}
           {isAuthenticated && (
             <>
-              <Nav.Link className="mr-2" onClick={() => logout()}>
+              <Nav.Link className="text-light mr-2" onClick={() => logout()}>
                 <FaIcon icon={faBan} style={{ marginRight: "0.4rem" }}></FaIcon>
                 Log out
               </Nav.Link>
