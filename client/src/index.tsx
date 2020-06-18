@@ -30,5 +30,3 @@ ReactDOM.render(
 );
 
 serviceWorker.unregister();
-
-console.log(process.env.REACT_APP_PUREWACC_AUTH0_DOMAIN);
