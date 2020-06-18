@@ -34,7 +34,7 @@ const NavBar = () => {
                 onClick={() => loginWithRedirect({})}
               >
                 <FaIcon icon={faKey} style={{ marginRight: "0.4rem" }}></FaIcon>
-                Log In
+                Sign up
               </Button>
             </Nav.Item>
           )}
