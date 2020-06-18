@@ -8,7 +8,8 @@ const Banner = () => {
   return show ? (
     <div className="bg-info px-4 py-3 text-dark w-100">
       PureWACC will give you an easy way of finding a company's cost of capital.
-      Check out the WACC calculator while waiting for the good stuff.
+      Check out the WACC calculator while waiting for more functionality. Sign
+      up to get news and updates.
       <FaIcon
         icon={faTimes}
         className="float-right mt-1"
