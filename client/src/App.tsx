@@ -8,7 +8,10 @@ function App() {
   return (
     <>
       <NavBar />
-      <Container className="p-4">
+      <Container
+        className="p-4 d-flex flex-column justify-content-center"
+        style={{ minHeight: "calc(100vh - 59px)" }}
+      >
         <Landing />
       </Container>
     </>
