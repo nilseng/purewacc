@@ -13,7 +13,7 @@ const NavBar = () => {
 
   return (
     <Navbar bg="dark" expand="md" collapseOnSelect>
-      <Navbar.Brand style={{ color: "#f8f9fa" }}>
+      <Navbar.Brand className="text-light">
         <AnimatedLogo height={"2rem"} width={"2rem"} />
         <span className="ml-1">Pure WACC</span>
       </Navbar.Brand>
