@@ -5,6 +5,7 @@ import { faKey, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { useAuth0 } from "../react-auth0-spa";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
@@ -32,7 +33,13 @@ const Landing = () => {
             onClick={() => console.log("create new project")}
           >
             <FaIcon icon={faPlus} className="mr-2"></FaIcon>
-            <span className="text-light">New Project</span>
+            <Link
+              to="/project"
+              className="text-light"
+              style={{ textDecoration: "none" }}
+            >
+              New Project
+            </Link>
           </Button>
         </>
       )}
