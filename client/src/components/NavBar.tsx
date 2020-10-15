@@ -3,12 +3,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSearchDollar,
-  faKey,
-  faBan,
-} from "@fortawesome/free-solid-svg-icons";
+import { faKey, faBan } from "@fortawesome/free-solid-svg-icons";
 import { useAuth0 } from "../react-auth0-spa";
+
+import AnimatedLogo from "./AnimatedLogo";
 
 const NavBar = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -16,8 +14,8 @@ const NavBar = () => {
   return (
     <Navbar bg="dark" expand="md" collapseOnSelect>
       <Navbar.Brand style={{ color: "#f8f9fa" }}>
-        <FaIcon icon={faSearchDollar} className="mr-1" />
-        PureWACC
+        <AnimatedLogo height={"2rem"} width={"2rem"} />
+        <span className="ml-1">PureWACC</span>
       </Navbar.Brand>
       <Navbar.Toggle
         className="mb-2"
