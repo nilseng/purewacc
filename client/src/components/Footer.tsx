@@ -29,10 +29,10 @@ const Footer = () => {
                 </Link>
               </li>
               <li className="list-group-item bg-dark border-0">
-                <Link to="https://www.pureokrs.com" className="text-light">
+                <a href="https://www.pureokrs.com" className="text-light">
                   <AnimatedLogo height="1rem" width="1rem" />
                   <span className="ml-2">Pure OKRs</span>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
