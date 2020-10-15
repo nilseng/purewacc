@@ -6,8 +6,9 @@ import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { useAuth0 } from "../react-auth0-spa";
 
 const Landing = () => {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
 
+  if (loading) return <p>Loading...</p>;
   return (
     <div className="d-flex flex-column align-items-center">
       <p>Welcome to Pure WACC</p>
