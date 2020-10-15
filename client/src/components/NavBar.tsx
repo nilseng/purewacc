@@ -15,7 +15,7 @@ const NavBar = () => {
     <Navbar bg="dark" expand="md" collapseOnSelect>
       <Navbar.Brand style={{ color: "#f8f9fa" }}>
         <AnimatedLogo height={"2rem"} width={"2rem"} />
-        <span className="ml-1">PureWACC</span>
+        <span className="ml-1">Pure WACC</span>
       </Navbar.Brand>
       <Navbar.Toggle
         className="mb-2"
