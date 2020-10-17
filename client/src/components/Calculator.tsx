@@ -155,9 +155,7 @@ const Calculator = () => {
           </Form>
         </Card.Body>
         <Card.Footer>
-          <Card.Text>
-            WACC <h2>{WACC.toLocaleString()}</h2>
-          </Card.Text>
+          WACC <h2>{WACC.toLocaleString()}</h2>
         </Card.Footer>
       </Card>
     </Row>
