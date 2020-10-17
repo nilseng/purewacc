@@ -12,7 +12,6 @@ const AdminTool = () => {
       currency: "NOK",
       source: "Damodaran",
     });
-    console.log(res);
   };
   const addBeta = () => {
     console.log("add beta");
