@@ -2,16 +2,23 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+
+import AdminModal from "./AdminModal";
+
 import { addRiskFreeRate, getRiskFreeRates } from "../utils/AdminService";
 
 const AdminTool = () => {
   const [riskFreeRates, setRfRates] = useState();
+
+  const [showModal, setShowModal] = useState(false);
+
   const addRfRate = async () => {
-    const res = await addRiskFreeRate({
+    setShowModal(true);
+    /* const res = await addRiskFreeRate({
       rate: 0.01,
       currency: "NOK",
       source: "Damodaran",
-    });
+    }); */
   };
   const addBeta = () => {
     console.log("add beta");
@@ -36,6 +43,7 @@ const AdminTool = () => {
         >
           Add Risk Free Rate
         </Button>
+        <AdminModal show={showModal} setShow={setShowModal} />
         <Button className="m-2" variant="secondary" size="sm" onClick={addBeta}>
           Add Beta
         </Button>
