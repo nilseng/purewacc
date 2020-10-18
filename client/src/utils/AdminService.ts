@@ -1,7 +1,6 @@
 import { IRiskFreeRate } from "../models/RiskFreeRate";
 
 export const addRiskFreeRate = async (rF: IRiskFreeRate) => {
-    console.log(rF)
     const res = await fetch("/risk-free-rate", {
         method: "POST",
         headers: {
@@ -10,10 +9,10 @@ export const addRiskFreeRate = async (rF: IRiskFreeRate) => {
         },
         body: JSON.stringify(rF)
     })
-    return res
+    return res.json()
 }
 
 export const getRiskFreeRates = async () => {
     const res = await fetch("/risk-free-rates")
-    return res
+    return res.json()
 }

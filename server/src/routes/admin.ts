@@ -17,7 +17,7 @@ router.post("/risk-free-rate", async (req, res) => {
     }
     rfRate.createdAt = Date.now()
     const doc = await riskFreeRateCollection.insertOne(rfRate)
-    res.status(200).json({ msg: "risk free rate saved" })
+    res.status(200).json(doc.ops[0])
 })
 
 export default router

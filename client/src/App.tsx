@@ -9,7 +9,7 @@ import Landing from "./components/Landing";
 import Project from "./components/Project";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
-import AdminTool from "./components/AdminTool";
+import AdminTool from "./components/AdminTool/AdminTool";
 
 function App() {
   return (
