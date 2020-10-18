@@ -3,7 +3,7 @@ import { Link, Route, Switch } from "react-router-dom";
 
 import RiskFreeRates from "./RiskFreeRates";
 import Betas from "./Betas";
-import EquityRiskPremium from "./EquityRiskPremium";
+import MarketReturns from "./MarketReturns";
 import Nav from "react-bootstrap/Nav";
 
 const AdminTool = () => {
@@ -29,10 +29,7 @@ const AdminTool = () => {
       <Switch>
         <Route path="/admin/risk-free-rates" component={RiskFreeRates} />
         <Route path="/admin/betas" component={Betas} />
-        <Route
-          path="/admin/equity-risk-premiums"
-          component={EquityRiskPremium}
-        />
+        <Route path="/admin/equity-risk-premiums" component={MarketReturns} />
       </Switch>
     </>
   );

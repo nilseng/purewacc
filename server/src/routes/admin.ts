@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { riskFreeRateCollection, betaCollection } from "../../database/databaseSetup"
+import { riskFreeRateCollection, betaCollection, marketReturnCollection } from "../../database/databaseSetup"
 
 const router = express.Router()
 
@@ -33,6 +33,22 @@ router.post("/beta", async (req, res) => {
     }
     beta.createdAt = Date.now()
     const doc = await betaCollection.insertOne(beta)
+    res.status(200).json(doc.ops[0])
+})
+
+router.get("/market-returns", async (req, res) => {
+    const marketReturns = await marketReturnCollection.find({}).toArray()
+    res.status(200).json(marketReturns)
+})
+
+router.post("/market-return", async (req, res) => {
+    const marketReturn = req.body
+    //TODO: Find a better way to validate
+    if (!((marketReturn.return === 0 || marketReturn.return) && marketReturn.market && marketReturn.source)) {
+        return res.status(400).json({ Error: "Invalid market return object" })
+    }
+    marketReturn.createdAt = Date.now()
+    const doc = await marketReturnCollection.insertOne(marketReturn)
     res.status(200).json(doc.ops[0])
 })
 
