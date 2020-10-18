@@ -10,6 +10,7 @@ import Project from "./components/Project";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
 import AdminTool from "./components/AdminTool/AdminTool";
+import ProjectTool from "./components/ProjectTool/ProjectTool";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/project" component={Project} />
           <Route path="/calculator" component={Calculator} />
           <Route path="/admin" component={AdminTool} />
+          <Route path="/project-tool" component={ProjectTool} />
         </Switch>
       </Container>
       <Footer />

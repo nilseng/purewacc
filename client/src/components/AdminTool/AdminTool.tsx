@@ -19,17 +19,14 @@ const AdminTool = () => {
         <Link to="/admin/betas" className="btn btn-sm btn-primary m-2">
           Betas
         </Link>
-        <Link
-          to="/admin/equity-risk-premiums"
-          className="btn btn-sm btn-primary m-2"
-        >
-          Equity Risk Premiums
+        <Link to="/admin/market-returns" className="btn btn-sm btn-primary m-2">
+          Market Returns
         </Link>
       </Nav>
       <Switch>
         <Route path="/admin/risk-free-rates" component={RiskFreeRates} />
         <Route path="/admin/betas" component={Betas} />
-        <Route path="/admin/equity-risk-premiums" component={MarketReturns} />
+        <Route path="/admin/market-returns" component={MarketReturns} />
       </Switch>
     </>
   );
