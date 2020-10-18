@@ -1,6 +1,6 @@
 import db, { Collection } from 'mongodb'
 
-let riskFreeRateCollection: Collection
+let riskFreeRateCollection: Collection, betaCollection: Collection
 
 const connectToMongoDb = async () => {
     const db_uri = process.env.DB_URI;
@@ -17,6 +17,7 @@ const connectToMongoDb = async () => {
     );
 
     riskFreeRateCollection = client.db().collection("riskFreeRates");
+    betaCollection = client.db().collection("betas")
 
     //Connection events
     client.on("connected", () => {
@@ -50,10 +51,8 @@ const connectToMongoDb = async () => {
             process.exit(0);
         });
     });
-
-    return [riskFreeRateCollection];
 };
 
-export { riskFreeRateCollection }
+export { riskFreeRateCollection, betaCollection }
 
 export default connectToMongoDb;
