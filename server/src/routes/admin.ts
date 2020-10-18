@@ -27,6 +27,7 @@ router.get("/betas", async (req, res) => {
 
 router.post("/beta", async (req, res) => {
     const beta = req.body
+    //TODO: Find a better way to validate
     if (!((beta.beta === 0 || beta.beta) && beta.industry && beta.source)) {
         return res.status(400).json({ Error: "Invalid beta object" })
     }
