@@ -13,11 +13,6 @@ export const addRiskFreeRate = async (rF: IRiskFreeRate) => {
     return res.json()
 }
 
-export const getRiskFreeRates = async () => {
-    const res = await fetch("/risk-free-rates")
-    return res.json()
-}
-
 export const addBeta = async (beta: IBeta) => {
     const res = await fetch("/beta", {
         method: "POST",

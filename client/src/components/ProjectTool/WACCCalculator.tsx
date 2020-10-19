@@ -25,7 +25,7 @@ const defaultInput = {
   Tc: 0.2,
 };
 
-const Calculator = () => {
+const WACCCalculator = () => {
   const [WACC, setWACC] = useState(calculateWACC());
   // eslint-disable-next-line
   const [input, setInput] = useState(defaultInput);
@@ -162,4 +162,4 @@ const Calculator = () => {
   );
 };
 
-export default Calculator;
+export default WACCCalculator;

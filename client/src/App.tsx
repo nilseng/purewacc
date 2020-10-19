@@ -6,9 +6,8 @@ import history from "./utils/history";
 
 import NavBar from "./components/NavBar";
 import Landing from "./components/Landing";
-import Project from "./components/Project";
 import Footer from "./components/Footer";
-import Calculator from "./components/Calculator";
+import WACCCalculator from "./components/ProjectTool/WACCCalculator";
 import AdminTool from "./components/AdminTool/AdminTool";
 import ProjectTool from "./components/ProjectTool/ProjectTool";
 
@@ -16,14 +15,10 @@ function App() {
   return (
     <Router history={history}>
       <NavBar />
-      <Container
-        className="px-0 py-5 d-flex flex-column"
-        style={{ minHeight: "calc(100vh - 259px)" }}
-      >
+      <Container style={{ minHeight: "calc(100vh - 259px)" }}>
         <Switch>
           <Route path="/" exact component={Landing} />
-          <Route path="/project" component={Project} />
-          <Route path="/calculator" component={Calculator} />
+          <Route path="/calculator" component={WACCCalculator} />
           <Route path="/admin" component={AdminTool} />
           <Route path="/project-tool" component={ProjectTool} />
         </Switch>

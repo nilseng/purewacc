@@ -4,7 +4,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { IRiskFreeRate } from "../../models/RiskFreeRate";
-import { addRiskFreeRate, getRiskFreeRates } from "../../utils/AdminService";
+import { addRiskFreeRate } from "../../utils/AdminService";
+import { getRiskFreeRates } from "../../utils/RfService";
 
 const defaultRfRate: IRiskFreeRate = {
   rate: 0.0,

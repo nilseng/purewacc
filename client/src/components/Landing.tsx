@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,19 +13,14 @@ const Landing = () => {
       style={{ minHeight: "50vh" }}
     >
       <h5 className="m-4">Welcome to Pure WACC</h5>
-      <Button
-        variant="outline-primary"
-        onClick={() => console.log("create new project")}
+      <Link
+        to="/project-tool"
+        className="btn btn-outline-primary text-light"
+        style={{ textDecoration: "none" }}
       >
         <FaIcon icon={faPlus} className="mr-2"></FaIcon>
-        <Link
-          to="/project"
-          className="text-light"
-          style={{ textDecoration: "none" }}
-        >
-          New Project
-        </Link>
-      </Button>
+        New Project
+      </Link>
     </Card>
   );
 };

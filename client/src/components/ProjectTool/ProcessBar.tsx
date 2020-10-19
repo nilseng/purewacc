@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 
 const ProcessBar = () => {
   return (
-    <Row>
+    <Row className="pt-4">
       <Col className="p-0">
         <div
           className="w-100 d-flex justify-content-center"
