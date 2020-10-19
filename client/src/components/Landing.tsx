@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <Card
       bg="dark"
-      className="p-4 d-flex flex-column justify-content-center align-items-center"
+      className="d-flex flex-column justify-content-center align-items-center p-4 my-4"
       style={{ minHeight: "50vh" }}
     >
       <h5 className="m-4">Welcome to Pure WACC</h5>

@@ -1,1 +1,1 @@
-web serve -s client/build
+web cd server && npx ts-node src/index.ts
