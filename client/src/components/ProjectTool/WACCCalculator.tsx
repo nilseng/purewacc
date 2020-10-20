@@ -1,41 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { IProject } from "../../models/Project";
 
-interface WACCInput {
-  E: number;
+const calculateWACC = (
+  E: number = 0,
+  Re: number = 0,
+  D: number = 0,
+  Rd: number = 0,
+  Tc: number = 0
+) => {
+  const V = E + D;
+  return V ? (E / V) * Re + (D / V) * Rd * (1 - Tc) : 0;
+};
+
+interface IProps {
+  project: IProject;
   Re: number;
-  D: number;
-  Rd: number;
-  Tc: number;
+  handleInputChange: any;
 }
 
-const calculateWACC = (input: WACCInput = defaultInput) => {
-  const V = input.E + input.D;
-  return (input.E / V) * input.Re + (input.D / V) * input.Rd * (1 - input.Tc);
-};
+const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
+  const [WACC, setWACC] = useState(0);
 
-const defaultInput = {
-  E: 25000,
-  Re: 0.14,
-  D: 18000,
-  Rd: 0.07,
-  Tc: 0.2,
-};
+  useEffect(() => {
+    setWACC(
+      calculateWACC(
+        project.equity,
+        Re,
+        project.debt,
+        project.costOfDebt,
+        project.tax
+      )
+    );
+  }, [project, Re]);
 
-const WACCCalculator = () => {
-  const [WACC, setWACC] = useState(calculateWACC());
-  // eslint-disable-next-line
-  const [input, setInput] = useState(defaultInput);
-  const handleChange = (val: any) => {
-    setInput((prevInput: WACCInput) => {
-      const input = { ...prevInput, ...val };
-      setWACC(calculateWACC(input));
-      return input;
-    });
-  };
   return (
     <Row className="justify-content-md-center">
       <Card
@@ -44,7 +45,7 @@ const WACCCalculator = () => {
         style={{ width: "32rem", maxWidth: "100%" }}
       >
         <Card.Header>
-          <Card.Title className="p-4">WACC Calculator</Card.Title>
+          <Card.Title className="p-4">Calculate WACC</Card.Title>
         </Card.Header>
         <Card.Body className="p-4">
           <Form>
@@ -54,16 +55,11 @@ const WACCCalculator = () => {
               </Form.Label>
               <Col sm={4}>
                 <Form.Control
+                  name="equity"
+                  type="number"
                   size="sm"
-                  placeholder={"" + defaultInput.E.toLocaleString()}
                   required
-                  onChange={(e: any) =>
-                    handleChange(
-                      e.target.value
-                        ? { E: +e.target.value }
-                        : { E: defaultInput.E }
-                    )
-                  }
+                  onChange={handleInputChange}
                 ></Form.Control>
               </Col>
             </Form.Group>
@@ -72,18 +68,7 @@ const WACCCalculator = () => {
                 Re
               </Form.Label>
               <Col sm={4}>
-                <Form.Control
-                  size="sm"
-                  placeholder={"" + defaultInput.Re}
-                  required
-                  onChange={(e: any) =>
-                    handleChange(
-                      e.target.value
-                        ? { Re: +e.target.value }
-                        : { Re: defaultInput.Re }
-                    )
-                  }
-                ></Form.Control>
+                <Form.Text>{Re}</Form.Text>
               </Col>
               <Col sm={4}>
                 <Form.Text muted>Cost of Equity</Form.Text>
@@ -95,16 +80,11 @@ const WACCCalculator = () => {
               </Form.Label>
               <Col sm={4}>
                 <Form.Control
+                  name="debt"
+                  type="number"
                   size="sm"
-                  placeholder={"" + defaultInput.D.toLocaleString()}
                   required
-                  onChange={(e: any) =>
-                    handleChange(
-                      e.target.value
-                        ? { D: +e.target.value }
-                        : { D: defaultInput.D }
-                    )
-                  }
+                  onChange={handleInputChange}
                 ></Form.Control>
               </Col>
             </Form.Group>
@@ -114,16 +94,11 @@ const WACCCalculator = () => {
               </Form.Label>
               <Col sm={4}>
                 <Form.Control
+                  name="costOfDebt"
+                  type="number"
                   size="sm"
-                  placeholder={"" + defaultInput.Rd}
                   required
-                  onChange={(e: any) =>
-                    handleChange(
-                      e.target.value
-                        ? { Rd: +e.target.value }
-                        : { Rd: defaultInput.Rd }
-                    )
-                  }
+                  onChange={handleInputChange}
                 ></Form.Control>
               </Col>
               <Col sm={4}>
@@ -136,16 +111,11 @@ const WACCCalculator = () => {
               </Form.Label>
               <Col sm={4}>
                 <Form.Control
+                  name="tax"
+                  type="number"
                   size="sm"
-                  placeholder={"" + defaultInput.Tc}
                   required
-                  onChange={(e: any) =>
-                    handleChange(
-                      e.target.value
-                        ? { Tc: +e.target.value }
-                        : { Tc: defaultInput.Tc }
-                    )
-                  }
+                  onChange={handleInputChange}
                 ></Form.Control>
               </Col>
               <Col sm={4}>

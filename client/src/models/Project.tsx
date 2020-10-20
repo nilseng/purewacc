@@ -4,6 +4,10 @@ export interface IProject {
   name: string;
   rfId?: string;
   branches: IBranch[];
+  debt?: number;
+  equity?: number;
+  tax?: number;
+  costOfDebt?: number;
 }
 
 export interface IBranch {
