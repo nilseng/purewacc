@@ -91,7 +91,7 @@ const ProjectTool = () => {
 
   return (
     <>
-      <ProcessBar />
+      <ProcessBar steps={projectProcess} currentStep={currentStep} />
       {/* 1. Initialize project with name and currency */}
       {projectProcess[currentStep] === "initProject" && (
         <InitProject
