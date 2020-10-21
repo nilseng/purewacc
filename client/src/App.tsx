@@ -4,6 +4,7 @@ import { Switch, Route, Router } from "react-router-dom";
 
 import history from "./utils/history";
 
+import PrivateRoute from "./components/PrivateRoute";
 import NavBar from "./components/NavBar";
 import Landing from "./components/Landing";
 import Footer from "./components/Footer";
@@ -18,9 +19,9 @@ function App() {
       <Container style={{ minHeight: "calc(100vh - 259px)" }}>
         <Switch>
           <Route path="/" exact component={Landing} />
-          <Route path="/calculator" component={WACCCalculator} />
-          <Route path="/admin" component={AdminTool} />
-          <Route path="/project-tool" component={ProjectTool} />
+          <PrivateRoute path="/calculator" component={WACCCalculator} />
+          <PrivateRoute path="/admin" component={AdminTool} />
+          <PrivateRoute path="/project-tool" component={ProjectTool} />
         </Switch>
       </Container>
       <Footer />

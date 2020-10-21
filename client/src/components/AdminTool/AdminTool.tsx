@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
 
+import PrivateRoute from "../PrivateRoute";
 import RiskFreeRates from "./RiskFreeRates";
 import Betas from "./Betas";
 import MarketReturns from "./MarketReturns";
@@ -24,9 +25,9 @@ const AdminTool = () => {
         </Link>
       </Nav>
       <Switch>
-        <Route path="/admin/risk-free-rates" component={RiskFreeRates} />
-        <Route path="/admin/betas" component={Betas} />
-        <Route path="/admin/market-returns" component={MarketReturns} />
+        <PrivateRoute path="/admin/risk-free-rates" component={RiskFreeRates} />
+        <PrivateRoute path="/admin/betas" component={Betas} />
+        <PrivateRoute path="/admin/market-returns" component={MarketReturns} />
       </Switch>
     </>
   );
