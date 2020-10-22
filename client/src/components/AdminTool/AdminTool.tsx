@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Switch } from "react-router-dom";
 
 import PrivateRoute from "../PrivateRoute";
 import RiskFreeRates from "./RiskFreeRates";
