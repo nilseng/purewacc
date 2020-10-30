@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { IMarketReturn } from "../../models/MarketReturn";
-import { addMarketReturn, getMarketReturns } from "../../utils/AdminService";
+import { addMarketReturn, getMarketReturns } from "../../services/AdminService";
 
 const defaultMarketReturn: IMarketReturn = {
   return: 1.2,
