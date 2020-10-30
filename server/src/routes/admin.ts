@@ -1,6 +1,7 @@
 import express from 'express'
 
 import { riskFreeRateCollection, betaCollection, marketReturnCollection } from "../../database/databaseSetup"
+import { checkJwt, checkAdminScope } from '../auth/auth'
 
 const router = express.Router()
 
@@ -9,7 +10,7 @@ router.get("/risk-free-rates", async (req, res) => {
     res.status(200).json(rfRates)
 })
 
-router.post("/risk-free-rate", async (req, res) => {
+router.post("/risk-free-rate", checkJwt, checkAdminScope, async (req, res) => {
     const rfRate = req.body
     //TODO: Find a better way to validate
     if (!((rfRate.rate === 0 || rfRate.rate) && rfRate.currency && rfRate.source)) {

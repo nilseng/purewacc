@@ -1,10 +1,29 @@
 import dotenv from "dotenv"
 import axios, { AxiosRequestConfig } from "axios"
-import jwksClient from 'jwks-rsa'
-import jwt, { Algorithm } from 'jsonwebtoken'
-import jwtAuthz from 'express-jwt-authz'
+import jwt from "express-jwt";
+import jwksRsa from "jwks-rsa"
+import jwtAuthz from "express-jwt-authz"
 
 dotenv.config()
+
+export const checkJwt = jwt({
+    // Dynamically provide a signing key
+    // based on the kid in the header and 
+    // the signing keys provided by the JWKS endpoint.
+    secret: jwksRsa.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: `https://dev-purewacc.eu.auth0.com/.well-known/jwks.json`
+    }),
+
+    // Validate the audience and the issuer.
+    audience: 'YOUR_API_IDENTIFIER',
+    issuer: `https://dev-purewacc.eu.auth0.com/`,
+    algorithms: ['RS256']
+});
+
+export const checkAdminScope = jwtAuthz(['admin'])
 
 const body = {
     client_id: process.env.AUTH0_CLIENT_ID,
@@ -30,45 +49,3 @@ export const getManagementApiToken = async () => {
         return
     }
 }
-
-const client = jwksClient({
-    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
-});
-
-const getKey = (header: any, cb: any) => {
-    client.getSigningKey(header.kid, (err, key: jwksClient.SigningKey) => {
-        const signingKey = (key as jwksClient.CertSigningKey).publicKey || (key as jwksClient.RsaSigningKey).rsaPublicKey;
-        cb(null, signingKey);
-    });
-}
-
-export const isTokenValid = async (token: string) => {
-    if (token) {
-        const bearerToken = token.split(" ")
-
-        const result = new Promise((resolve, reject) => {
-            jwt.verify(
-                bearerToken[1],
-                getKey,
-                {
-                    issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-                    algorithms: ["RS256"]
-                },
-                (error, decoded) => {
-                    if (error) {
-                        resolve({ error })
-                    }
-                    if (decoded) {
-                        resolve(decoded)
-                    }
-                }
-            )
-        })
-
-        return result
-    }
-
-    return { error: 'No Token provided' }
-}
-
-const checkScopes = (scopes: string[]) => jwtAuthz(scopes)
