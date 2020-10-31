@@ -16,9 +16,7 @@ export const checkJwt = jwt({
         jwksRequestsPerMinute: 5,
         jwksUri: `https://dev-purewacc.eu.auth0.com/.well-known/jwks.json`
     }),
-
-    // Validate the audience and the issuer.
-    audience: 'YOUR_API_IDENTIFIER',
+    audience: 'https://dev-purewacc.api',
     issuer: `https://dev-purewacc.eu.auth0.com/`,
     algorithms: ['RS256']
 });

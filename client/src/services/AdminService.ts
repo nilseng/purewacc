@@ -2,10 +2,12 @@ import { IRiskFreeRate } from "../models/RiskFreeRate";
 import { IBeta } from "../models/Beta"
 import { IMarketReturn } from "../models/MarketReturn";
 
-export const addRiskFreeRate = async (rF: IRiskFreeRate) => {
+export const addRiskFreeRate = async (token: any, rF: IRiskFreeRate) => {
+    console.log(token)
     const res = await fetch("/risk-free-rate", {
         method: "POST",
         headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(rF)

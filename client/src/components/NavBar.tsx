@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faBan } from "@fortawesome/free-solid-svg-icons";
-import { useAuth0 } from "../react-auth0-spa";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import AnimatedLogo from "./AnimatedLogo";
 
