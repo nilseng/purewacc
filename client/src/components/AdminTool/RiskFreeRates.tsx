@@ -24,7 +24,6 @@ const RiskFreeRates = () => {
 
   const addRfRate = async () => {
     const token = await getAccessTokenSilently({
-      audience: "https://dev-purewacc.api",
       scope: "admin",
     });
     const res = await addRiskFreeRate(token, riskFreeRate);
