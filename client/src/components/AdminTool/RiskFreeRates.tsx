@@ -24,6 +24,7 @@ const RiskFreeRates = () => {
 
   const addRfRate = async () => {
     const token = await getAccessTokenSilently({
+      audience: process.env.REACT_APP_API_AUDIENCE,
       scope: "admin",
     });
     const res = await addRiskFreeRate(token, riskFreeRate);
