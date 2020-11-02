@@ -17,7 +17,7 @@ export const checkJwt = jwt({
         jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
     }),
     audience: process.env.AUTH0_AUDIENCE,
-    issuer: process.env.AUTH0_DOMAIN,
+    issuer: `https://${process.env.AUTH0_DOMAIN}`,
     algorithms: ['RS256']
 });
 
@@ -26,7 +26,7 @@ export const checkAdminScope = jwtAuthz(['admin'])
 const body = {
     client_id: process.env.AUTH0_CLIENT_ID,
     client_secret: process.env.AUTH0_SECRET,
-    audience: process.env.AUTH0_AUDIENCE,
+    audience: process.env.AUTH0_MGMT_API_AUDIENCE,
     grant_type: 'client_credentials'
 }
 
