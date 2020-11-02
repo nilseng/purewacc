@@ -3,8 +3,7 @@ import { IBeta } from "../models/Beta"
 import { IMarketReturn } from "../models/MarketReturn";
 
 export const addRiskFreeRate = async (token: any, rF: IRiskFreeRate) => {
-    console.log(token)
-    const res = await fetch("/risk-free-rate", {
+    const res = await fetch("/api/risk-free-rate", {
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`,
@@ -16,7 +15,7 @@ export const addRiskFreeRate = async (token: any, rF: IRiskFreeRate) => {
 }
 
 export const addBeta = async (beta: IBeta) => {
-    const res = await fetch("/beta", {
+    const res = await fetch("/api/beta", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -27,12 +26,12 @@ export const addBeta = async (beta: IBeta) => {
 }
 
 export const getBetas = async () => {
-    const res = await fetch("/betas")
+    const res = await fetch("/api/betas")
     return res.json()
 }
 
 export const addMarketReturn = async (mr: IMarketReturn) => {
-    const res = await fetch("/market-return", {
+    const res = await fetch("/api/market-return", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -43,6 +42,6 @@ export const addMarketReturn = async (mr: IMarketReturn) => {
 }
 
 export const getMarketReturns = async () => {
-    const res = await fetch("/market-returns")
+    const res = await fetch("/api/market-returns")
     return res.json()
 }

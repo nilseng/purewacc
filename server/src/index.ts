@@ -19,7 +19,7 @@ app.use(
 app.use(bodyParser.json())
 app.use(morgan("tiny"))
 
-app.use("/", api)
+app.use("/api", api)
 
 app.use(express.static(path.join(__dirname, '../../client/build')))
 
