@@ -14,10 +14,10 @@ export const checkJwt = jwt({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: `https://dev-purewacc.eu.auth0.com/.well-known/jwks.json`
+        jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
     }),
-    audience: 'https://dev-purewacc.api',
-    issuer: `https://dev-purewacc.eu.auth0.com/`,
+    audience: process.env.AUTH0_AUDIENCE,
+    issuer: process.env.AUTH0_DOMAIN,
     algorithms: ['RS256']
 });
 

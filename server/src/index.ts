@@ -25,6 +25,6 @@ app.use(express.static(path.join(__dirname, '../../client/build')))
 
 connectToMongoDb()
 
-app.listen({ host: process.env.HOST || 'localhost', port: process.env.PORT || 4000 }, () => console.log(`The server is now running on host ${process.env.HOST || 'localhost'} and port ${process.env.PORT || 4000}`))
+app.listen({ port: process.env.PORT || 4000 }, () => console.log(`The server is now running on port ${process.env.PORT || 4000}`))
 
 app.use('/*', express.static(path.join(__dirname, '../../client/build', 'index.html')))
