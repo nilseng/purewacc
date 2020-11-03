@@ -27,7 +27,6 @@ const MarketReturns = () => {
 
   const handleAddMr = async () => {
     const token = await getAccessTokenSilently({
-      audience: process.env.REACT_APP_API_AUDIENCE,
       scope: "admin",
     });
     const res = await addMarketReturn(token, mr);
