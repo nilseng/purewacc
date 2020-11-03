@@ -5,8 +5,10 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useAuth0 } from "@auth0/auth0-react";
 import { IRiskFreeRate } from "../../models/RiskFreeRate";
-import { addRiskFreeRate } from "../../services/AdminService";
-import { getRiskFreeRates } from "../../services/RiskFreeRatefService";
+import {
+  getRiskFreeRates,
+  addRiskFreeRate,
+} from "../../services/RiskFreeRatefService";
 
 const defaultRfRate: IRiskFreeRate = {
   rate: 0.0,
