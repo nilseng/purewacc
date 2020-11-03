@@ -12,7 +12,6 @@ router.get("/risk-free-rates", async (req, res) => {
 
 router.post("/risk-free-rate", checkJwt, checkAdminScope, async (req, res) => {
     const rfRate = req.body
-    //TODO: Find a better way to validate
     if (!((rfRate.rate === 0 || rfRate.rate) && rfRate.currency && rfRate.source)) {
         return res.status(400).json({ Error: "Invalid risk free rate object" })
     }
@@ -26,9 +25,8 @@ router.get("/betas", async (req, res) => {
     res.status(200).json(betas)
 })
 
-router.post("/beta", async (req, res) => {
+router.post("/beta", checkJwt, checkAdminScope, async (req, res) => {
     const beta = req.body
-    //TODO: Find a better way to validate
     if (!((beta.beta === 0 || beta.beta) && beta.industry && beta.source)) {
         return res.status(400).json({ Error: "Invalid beta object" })
     }
@@ -42,9 +40,8 @@ router.get("/market-returns", async (req, res) => {
     res.status(200).json(marketReturns)
 })
 
-router.post("/market-return", async (req, res) => {
+router.post("/market-return", checkJwt, checkAdminScope, async (req, res) => {
     const marketReturn = req.body
-    //TODO: Find a better way to validate
     if (!((marketReturn.return === 0 || marketReturn.return) && marketReturn.market && marketReturn.source)) {
         return res.status(400).json({ Error: "Invalid market return object" })
     }

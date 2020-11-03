@@ -1,9 +1,10 @@
 import { IMarketReturn } from "../models/MarketReturn"
 
-export const addMarketReturn = async (mr: IMarketReturn) => {
+export const addMarketReturn = async (token: any, mr: IMarketReturn) => {
     const res = await fetch("/api/market-return", {
         method: "POST",
         headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(mr)

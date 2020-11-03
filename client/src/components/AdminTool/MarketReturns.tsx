@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -18,12 +19,18 @@ const defaultMarketReturn: IMarketReturn = {
 const defaultMarketReturns: IMarketReturn[] = [];
 
 const MarketReturns = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
   const [showEditMr, setShowEditMr] = useState(false);
   const [mrs, setMrs] = useState(defaultMarketReturns);
   const [mr, setMr] = useState(defaultMarketReturn);
 
   const handleAddMr = async () => {
-    const res = await addMarketReturn(mr);
+    const token = await getAccessTokenSilently({
+      audience: process.env.REACT_APP_API_AUDIENCE,
+      scope: "admin",
+    });
+    const res = await addMarketReturn(token, mr);
     setMrs([...mrs, res]);
     setShowEditMr(false);
     setMr(defaultMarketReturn);

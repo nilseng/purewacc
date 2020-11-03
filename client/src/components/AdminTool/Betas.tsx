@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import { IBeta } from "../../models/Beta";
 import { addBeta, getBetas } from "../../services/BetaService";
 
@@ -15,12 +17,18 @@ const defaultBeta: IBeta = {
 const defaultBetas: IBeta[] = [];
 
 const Betas = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
   const [showEditBeta, setShowEditBeta] = useState(false);
   const [betas, setBetas] = useState(defaultBetas);
   const [beta, setBeta] = useState(defaultBeta);
 
   const handleAddBeta = async () => {
-    const res = await addBeta(beta);
+    const token = await getAccessTokenSilently({
+      audience: process.env.REACT_APP_API_AUDIENCE,
+      scope: "admin",
+    });
+    const res = await addBeta(token, beta);
     setBetas([...betas, res]);
     setShowEditBeta(false);
     setBeta(defaultBeta);

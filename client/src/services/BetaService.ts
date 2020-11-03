@@ -1,9 +1,10 @@
 import { IBeta } from "../models/Beta"
 
-export const addBeta = async (beta: IBeta) => {
+export const addBeta = async (token: any, beta: IBeta) => {
     const res = await fetch("/api/beta", {
         method: "POST",
         headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(beta)
