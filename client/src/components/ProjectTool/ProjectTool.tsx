@@ -11,7 +11,7 @@ import InitProject from "./InitProject";
 import ProcessBar from "./ProcessBar";
 import AddBranches from "./AddBranches";
 import WACCCalculator from "./WACCCalculator";
-import { getRiskFreeRates } from "../../services/RfService";
+import { getRiskFreeRates } from "../../services/RiskFreeRatefService";
 import { getBetas, getMarketReturns } from "../../services/AdminService";
 import { IBeta } from "../../models/Beta";
 import { IMarketReturn } from "../../models/MarketReturn";
