@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { IBeta } from "../../models/Beta";
-import { addBeta, getBetas } from "../../services/AdminService";
+import { addBeta, getBetas } from "../../services/BetaService";
 
 const defaultBeta: IBeta = {
   beta: 1.1,
