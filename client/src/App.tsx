@@ -16,7 +16,7 @@ function App() {
   return (
     <Router history={history}>
       <NavBar />
-      <Container style={{ minHeight: "calc(100vh - 259px)" }}>
+      <Container style={{ minHeight: "calc(100vh - 260px)" }}>
         <Switch>
           <Route path="/" exact component={Landing} />
           <PrivateRoute path="/calculator" component={WACCCalculator} />
