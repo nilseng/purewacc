@@ -61,23 +61,8 @@ const AddBranches = ({
     <>
       <h5 className="my-4">Calculate Cost of Equity</h5>
       {project.branches.map((branch) => (
-        <Form.Row className="border-left border-light my-2" key={branch.id}>
-          <svg
-            className="ml-n2 mt-n1"
-            width="15"
-            height="15"
-            viewBox="0 0 100 100"
-          >
-            <circle
-              cx="50"
-              cy="50"
-              r="48"
-              stroke="#f8f9fa"
-              fill="#f8f9fa"
-              strokeWidth="1"
-            />
-          </svg>
-          <Col sm={12} md={6} className=" bg-dark rounded ml-4 px-2">
+        <Form.Row className="my-2" key={branch.id}>
+          <Col sm={12} md={6} className=" bg-dark rounded px-2">
             <Form.Row>
               <Col md={8} className="pt-2">
                 <Form.Group>
