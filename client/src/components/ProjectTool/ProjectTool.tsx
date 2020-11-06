@@ -5,6 +5,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuidv4 } from "uuid";
 
 import { IBranch, IProject } from "../../models/Project";
 import InitProject from "./InitProject";
@@ -20,7 +21,9 @@ import { IRiskFreeRate } from "../../models/RiskFreeRate";
 
 const defaultProject: IProject = {
   name: "",
-  branches: [{ id: 1, name: "", weight: 0, industry: "all", region: "global" }],
+  branches: [
+    { id: uuidv4(), name: "", weight: 0, industry: "all", region: "global" },
+  ],
 };
 
 const projectProcess = ["initProject", "addBranches", "WACC"];

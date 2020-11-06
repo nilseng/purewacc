@@ -3,7 +3,8 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuidv4 } from "uuid";
 
 import { IBranch, IProject } from "../../models/Project";
 import { IBeta } from "../../models/Beta";
@@ -31,13 +32,20 @@ const AddBranches = ({
       branches: [
         ...project.branches,
         {
-          id: project.branches.length + 1,
+          id: uuidv4(),
           name: "",
           weight: 0,
           industry: "all",
           region: "global",
         },
       ],
+    });
+  };
+
+  const deleteBranch = (id: string) => {
+    setProject({
+      ...project,
+      branches: project.branches.filter((b) => b.id !== id),
     });
   };
 
@@ -171,6 +179,14 @@ const AddBranches = ({
                 </Form.Text>
               </Col>
             </Form.Row>
+            <Button
+              className="float-right mb-2"
+              variant="secondary"
+              size="sm"
+              onClick={() => deleteBranch(branch.id)}
+            >
+              <FaIcon icon={faTrash} />
+            </Button>
           </Col>
         </Form.Row>
       ))}

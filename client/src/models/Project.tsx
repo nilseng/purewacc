@@ -11,7 +11,7 @@ export interface IProject {
 }
 
 export interface IBranch {
-  id: number;
+  id: string;
   name: string;
   weight: number;
   weightUnit?: string;
