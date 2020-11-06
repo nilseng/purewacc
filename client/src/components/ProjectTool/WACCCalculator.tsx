@@ -103,7 +103,12 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
       </Form.Row>
       <Row className="text-right">
         <Col sm={12} md={6} className="border-top border-dark py-4">
-          WACC <h2>{WACC.toFixed(3).toLocaleString()}</h2>
+          WACC{" "}
+          <h2>
+            {!isNaN(WACC)
+              ? WACC.toFixed(3).toLocaleString()
+              : (0).toFixed(3).toLocaleString()}
+          </h2>
         </Col>
       </Row>
     </>

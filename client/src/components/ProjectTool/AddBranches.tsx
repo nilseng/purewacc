@@ -200,9 +200,9 @@ const AddBranches = ({
         <Col sm={12} md={6} className="border-top border-dark py-4">
           Cost of Equity{" "}
           <h2>
-            {costOfEquity
+            {costOfEquity && !isNaN(costOfEquity)
               ? costOfEquity.toFixed(3).toLocaleString()
-              : (0).toFixed(3).toLocaleString()}
+              : (0.0).toFixed(3).toLocaleString()}
           </h2>
         </Col>
       </Row>
