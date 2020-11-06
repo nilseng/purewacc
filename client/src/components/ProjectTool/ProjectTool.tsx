@@ -109,6 +109,7 @@ const ProjectTool = () => {
           setProject={setProject}
           betas={betas}
           marketReturns={marketReturns}
+          costOfEquity={costOfEquity}
         />
       )}
       {/* 3. Calculate WACC based on E, D, Re, Rd, Tc */}

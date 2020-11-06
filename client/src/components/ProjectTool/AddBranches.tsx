@@ -8,15 +8,23 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { IBranch, IProject } from "../../models/Project";
 import { IBeta } from "../../models/Beta";
 import { IMarketReturn } from "../../models/MarketReturn";
+import Row from "react-bootstrap/Row";
 
 interface IProps {
   project: IProject;
   setProject: any;
   betas: IBeta[];
   marketReturns: IMarketReturn[];
+  costOfEquity?: number;
 }
 
-const AddBranches = ({ project, setProject, betas, marketReturns }: IProps) => {
+const AddBranches = ({
+  project,
+  setProject,
+  betas,
+  marketReturns,
+  costOfEquity,
+}: IProps) => {
   const addBranch = () => {
     setProject({
       ...project,
@@ -51,7 +59,7 @@ const AddBranches = ({ project, setProject, betas, marketReturns }: IProps) => {
 
   return (
     <>
-      <h5 className="my-4">Branches</h5>
+      <h5 className="my-4">Calculate Cost of Equity</h5>
       {project.branches.map((branch) => (
         <Form.Row className="border-left border-light my-2" key={branch.id}>
           <svg
@@ -187,6 +195,16 @@ const AddBranches = ({ project, setProject, betas, marketReturns }: IProps) => {
           Add Branch
         </Button>
       </div>
+      <Row className="text-right">
+        <Col sm={12} md={6} className="border-top border-dark py-4">
+          Cost of Equity{" "}
+          <h2>
+            {costOfEquity
+              ? costOfEquity.toFixed(3).toLocaleString()
+              : (0).toFixed(3).toLocaleString()}
+          </h2>
+        </Col>
+      </Row>
     </>
   );
 };

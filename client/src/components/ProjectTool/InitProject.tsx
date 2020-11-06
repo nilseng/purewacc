@@ -15,6 +15,7 @@ interface IProps {
 const InitProject = ({ project, handleInputChange, rfRates }: IProps) => {
   return (
     <>
+      <h5 className="my-4">Project Setup</h5>
       <Form.Row className="mt-4">
         <Col sm={8} md={6}>
           <ProjectName

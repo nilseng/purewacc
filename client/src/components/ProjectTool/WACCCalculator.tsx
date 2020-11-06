@@ -38,97 +38,76 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
   }, [project, Re]);
 
   return (
-    <Row className="justify-content-md-center">
-      <Card
-        bg="dark"
-        className="mt-4"
-        style={{ width: "32rem", maxWidth: "100%" }}
-      >
-        <Card.Header>
-          <Card.Title className="p-4">Calculate WACC</Card.Title>
-        </Card.Header>
-        <Card.Body className="p-4">
-          <Form>
-            <Form.Group as={Row} controlId="formHorizontalEquity">
-              <Form.Label column="sm" sm={3}>
-                Equity
-              </Form.Label>
-              <Col sm={4}>
-                <Form.Control
-                  name="equity"
-                  type="number"
-                  size="sm"
-                  required
-                  onChange={handleInputChange}
-                ></Form.Control>
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="formHorizontalRe">
-              <Form.Label column="sm" sm={3}>
-                Re
-              </Form.Label>
-              <Col sm={4}>
-                <Form.Text>{Re}</Form.Text>
-              </Col>
-              <Col sm={4}>
-                <Form.Text muted>Cost of Equity</Form.Text>
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="formHorizontalDebt">
-              <Form.Label column="sm" sm={3}>
-                Debt
-              </Form.Label>
-              <Col sm={4}>
-                <Form.Control
-                  name="debt"
-                  type="number"
-                  size="sm"
-                  required
-                  onChange={handleInputChange}
-                ></Form.Control>
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="formHorizontalRd">
-              <Form.Label column="sm" sm={3}>
-                Rd
-              </Form.Label>
-              <Col sm={4}>
-                <Form.Control
-                  name="costOfDebt"
-                  type="number"
-                  size="sm"
-                  required
-                  onChange={handleInputChange}
-                ></Form.Control>
-              </Col>
-              <Col sm={4}>
-                <Form.Text muted>Cost of Debt</Form.Text>
-              </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="formHorizontalRd">
-              <Form.Label column="sm" sm={3}>
-                Tc
-              </Form.Label>
-              <Col sm={4}>
-                <Form.Control
-                  name="tax"
-                  type="number"
-                  size="sm"
-                  required
-                  onChange={handleInputChange}
-                ></Form.Control>
-              </Col>
-              <Col sm={4}>
-                <Form.Text muted>Corporate Tax Rate</Form.Text>
-              </Col>
-            </Form.Group>
-          </Form>
-        </Card.Body>
-        <Card.Footer>
-          WACC <h2>{WACC.toLocaleString()}</h2>
-        </Card.Footer>
-      </Card>
-    </Row>
+    <>
+      <h5 className="my-4">Calculate WACC</h5>
+      <Form.Row>
+        <Col sm={4} md={2}>
+          <Form.Group>
+            <Form.Label>Equity</Form.Label>
+            <Form.Control
+              name="equity"
+              type="number"
+              size="sm"
+              required
+              onChange={handleInputChange}
+            ></Form.Control>
+          </Form.Group>
+        </Col>
+        <Col sm={4} md={2}></Col>
+        <Col sm={4} md={2}>
+          <Form.Group className="text-right text-muted">
+            <Form.Label>Cost of Equity</Form.Label>
+            <h2>{Re.toFixed(3)}</h2>
+          </Form.Group>
+        </Col>
+      </Form.Row>
+      <Form.Row>
+        <Col sm={4} md={2}>
+          <Form.Group>
+            <Form.Label>Debt</Form.Label>
+            <Form.Control
+              name="debt"
+              type="number"
+              size="sm"
+              required
+              onChange={handleInputChange}
+            ></Form.Control>
+          </Form.Group>
+        </Col>
+        <Col sm={4} md={2}></Col>
+        <Col sm={4} md={2}>
+          <Form.Group className="text-right text-muted">
+            <Form.Label>Cost of Debt</Form.Label>
+            <Form.Control
+              name="costOfDebt"
+              type="number"
+              size="sm"
+              required
+              onChange={handleInputChange}
+            ></Form.Control>
+          </Form.Group>
+        </Col>
+      </Form.Row>
+      <Form.Row>
+        <Col sm={4} md={2}>
+          <Form.Group>
+            <Form.Label>Tax Rate</Form.Label>
+            <Form.Control
+              name="tax"
+              type="number"
+              size="sm"
+              required
+              onChange={handleInputChange}
+            ></Form.Control>
+          </Form.Group>
+        </Col>
+      </Form.Row>
+      <Row className="text-right">
+        <Col sm={12} md={6} className="border-top border-dark py-4">
+          WACC <h2>{WACC.toFixed(3).toLocaleString()}</h2>
+        </Col>
+      </Row>
+    </>
   );
 };
 
