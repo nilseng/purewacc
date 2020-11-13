@@ -5,7 +5,8 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 
 import connectToMongoDb from "../database/databaseSetup"
-import api from './routes/admin'
+import adminRouter from './routes/admin'
+import projectRouter from './routes/project'
 
 dotenv.config()
 
@@ -19,7 +20,8 @@ app.use(
 app.use(bodyParser.json())
 app.use(morgan("tiny"))
 
-app.use("/api", api)
+app.use("/project", projectRouter)
+app.use("/api", adminRouter)
 
 app.use(express.static(path.join(__dirname, '../../client/build')))
 

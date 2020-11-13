@@ -1,6 +1,6 @@
 import db, { Collection } from 'mongodb'
 
-let riskFreeRateCollection: Collection, betaCollection: Collection, marketReturnCollection: Collection
+let projectCollection: Collection, riskFreeRateCollection: Collection, betaCollection: Collection, marketReturnCollection: Collection
 
 const connectToMongoDb = async () => {
     const db_uri = process.env.DB_URI;
@@ -16,6 +16,7 @@ const connectToMongoDb = async () => {
         `Mongoclient connected to database server:${client.isConnected()}`
     );
 
+    projectCollection = client.db().collection("projects")
     riskFreeRateCollection = client.db().collection("riskFreeRates");
     betaCollection = client.db().collection("betas")
     marketReturnCollection = client.db().collection("marketReturns")
@@ -54,6 +55,6 @@ const connectToMongoDb = async () => {
     });
 };
 
-export { riskFreeRateCollection, betaCollection, marketReturnCollection }
+export { projectCollection, riskFreeRateCollection, betaCollection, marketReturnCollection }
 
 export default connectToMongoDb;

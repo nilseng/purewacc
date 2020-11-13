@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
 import {
+  faCheck,
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { IBranch, IProject } from "../../models/Project";
 import InitProject from "./InitProject";
 import ProcessBar from "./ProcessBar";
 import AddBranches from "./AddBranches";
 import WACCCalculator from "./WACCCalculator";
+import { createProject } from "../../services/ProjectService";
 import { getRiskFreeRates } from "../../services/RiskFreeRatefService";
 import { getMarketReturns } from "../../services/MarketReturnService";
 import { getBetas } from "../../services/BetaService";
@@ -52,8 +55,10 @@ const calculateCostOfEquity = (
 };
 
 const ProjectTool = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
   const [project, setProject] = useState(defaultProject);
-  const [currentStep, setCurrenStep] = useState(0);
+  const [currentStep, setCurrenStep] = useState(2);
   const [rfRates, setRfRates] = useState([]);
   const [betas, setBetas] = useState([]);
   const [marketReturns, setMarketReturns] = useState([]);
@@ -79,6 +84,11 @@ const ProjectTool = () => {
 
   const prevStep = () => {
     if (currentStep > 0) setCurrenStep(currentStep - 1);
+  };
+
+  const saveProject = async () => {
+    const token = await getAccessTokenSilently();
+    createProject(token, project);
   };
 
   useEffect(() => {
@@ -138,6 +148,16 @@ const ProjectTool = () => {
         <Button className="m-4" variant="link" size="sm" onClick={nextStep}>
           Next
           <FaIcon className="ml-2" icon={faChevronRight} />
+        </Button>
+      )}
+      {currentStep === projectProcess.length - 1 && (
+        <Button
+          className="text-success m-4"
+          variant="link"
+          size="sm"
+          onClick={saveProject}
+        >
+          Save <FaIcon className="ml-2" icon={faCheck} />
         </Button>
       )}
     </>
