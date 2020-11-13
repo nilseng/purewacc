@@ -8,6 +8,8 @@ export interface IProject {
   equity?: number;
   tax?: number;
   costOfDebt?: number;
+  createdAt?: number;
+  createdBy?: string;
 }
 
 export interface IBranch {

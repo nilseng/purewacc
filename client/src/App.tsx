@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import WACCCalculator from "./components/ProjectTool/WACCCalculator";
 import AdminTool from "./components/AdminTool/AdminTool";
 import ProjectTool from "./components/ProjectTool/ProjectTool";
+import ProjectList from "./components/ProjectList";
 
 function App() {
   return (
@@ -19,9 +20,10 @@ function App() {
       <Container style={{ minHeight: "calc(100vh - 260px)" }}>
         <Switch>
           <Route path="/" exact component={Landing} />
+          <PrivateRoute path="/project-tool" component={ProjectTool} />
+          <PrivateRoute path="/projects" component={ProjectList} />
           <PrivateRoute path="/calculator" component={WACCCalculator} />
           <PrivateRoute path="/admin" component={AdminTool} />
-          <PrivateRoute path="/project-tool" component={ProjectTool} />
         </Switch>
       </Container>
       <Footer />
