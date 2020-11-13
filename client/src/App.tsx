@@ -12,6 +12,7 @@ import WACCCalculator from "./components/ProjectTool/WACCCalculator";
 import AdminTool from "./components/AdminTool/AdminTool";
 import ProjectTool from "./components/ProjectTool/ProjectTool";
 import ProjectList from "./components/ProjectList";
+import About from "./components/About";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <PrivateRoute path="/projects" component={ProjectList} />
           <PrivateRoute path="/calculator" component={WACCCalculator} />
           <PrivateRoute path="/admin" component={AdminTool} />
+          <Route path="/about" component={About} />
         </Switch>
       </Container>
       <Footer />
