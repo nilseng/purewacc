@@ -3,7 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
-import { faKey, faBan } from "@fortawesome/free-solid-svg-icons";
+import { faKey, faBan, faList } from "@fortawesome/free-solid-svg-icons";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import AnimatedLogo from "./AnimatedLogo";
@@ -38,6 +38,13 @@ const NavBar = () => {
           )}
           {isAuthenticated && (
             <>
+              <Nav.Link className="text-light mr-2" href="/projects">
+                <FaIcon
+                  icon={faList}
+                  style={{ marginRight: "0.4rem" }}
+                ></FaIcon>
+                Projects
+              </Nav.Link>
               <Nav.Link className="text-light mr-2" onClick={() => logout()}>
                 <FaIcon icon={faBan} style={{ marginRight: "0.4rem" }}></FaIcon>
                 Log out

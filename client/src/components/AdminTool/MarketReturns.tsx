@@ -1,14 +1,11 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { IMarketReturn } from "../../models/MarketReturn";
-import {
-  addMarketReturn,
-  getMarketReturns,
-} from "../../services/MarketReturnService";
+import { addMarketReturn } from "../../services/MarketReturnService";
 
 const defaultMarketReturn: IMarketReturn = {
   return: 1.2,
@@ -16,13 +13,15 @@ const defaultMarketReturn: IMarketReturn = {
   source: "",
 };
 
-const defaultMarketReturns: IMarketReturn[] = [];
+interface IProps {
+  marketReturns: IMarketReturn[];
+  setMarketReturns: any;
+}
 
-const MarketReturns = () => {
+const MarketReturns = ({ marketReturns, setMarketReturns }: IProps) => {
   const { getAccessTokenSilently } = useAuth0();
 
   const [showEditMr, setShowEditMr] = useState(false);
-  const [mrs, setMrs] = useState(defaultMarketReturns);
   const [mr, setMr] = useState(defaultMarketReturn);
 
   const handleAddMr = async () => {
@@ -30,7 +29,7 @@ const MarketReturns = () => {
       scope: "admin",
     });
     const res = await addMarketReturn(token, mr);
-    setMrs([...mrs, res]);
+    setMarketReturns([...marketReturns, res]);
     setShowEditMr(false);
     setMr(defaultMarketReturn);
   };
@@ -41,10 +40,6 @@ const MarketReturns = () => {
       [event.target.name]: event.target.value,
     });
   };
-
-  useEffect(() => {
-    getMarketReturns().then((mrs) => setMrs(mrs));
-  }, []);
 
   return (
     <Row>
@@ -93,8 +88,8 @@ const MarketReturns = () => {
             </Button>
           </Form>
         )}
-        {mrs &&
-          mrs.map((mr: IMarketReturn) => (
+        {marketReturns &&
+          marketReturns.map((mr: IMarketReturn) => (
             <div key={mr._id}>{JSON.stringify(mr)}</div>
           ))}
       </Col>

@@ -6,8 +6,27 @@ import RiskFreeRates from "./RiskFreeRates";
 import Betas from "./Betas";
 import MarketReturns from "./MarketReturns";
 import Nav from "react-bootstrap/Nav";
+import { IRiskFreeRate } from "../../models/RiskFreeRate";
+import { IBeta } from "../../models/Beta";
+import { IMarketReturn } from "../../models/MarketReturn";
 
-const AdminTool = () => {
+interface IProps {
+  betas: IBeta[];
+  setBetas: any;
+  marketReturns: IMarketReturn;
+  setMarketReturns: any;
+  riskFreeRates: IRiskFreeRate[];
+  setRiskFreeRates: any;
+}
+
+const AdminTool = ({
+  betas,
+  setBetas,
+  marketReturns,
+  setMarketReturns,
+  riskFreeRates,
+  setRiskFreeRates,
+}: IProps) => {
   return (
     <>
       <Nav>
@@ -25,9 +44,24 @@ const AdminTool = () => {
         </Link>
       </Nav>
       <Switch>
-        <PrivateRoute path="/admin/risk-free-rates" component={RiskFreeRates} />
-        <PrivateRoute path="/admin/betas" component={Betas} />
-        <PrivateRoute path="/admin/market-returns" component={MarketReturns} />
+        <PrivateRoute
+          path="/admin/risk-free-rates"
+          component={RiskFreeRates}
+          riskFreeRates={riskFreeRates}
+          setRiskFreeRates={setRiskFreeRates}
+        />
+        <PrivateRoute
+          path="/admin/betas"
+          component={Betas}
+          betas={betas}
+          setBetas={setBetas}
+        />
+        <PrivateRoute
+          path="/admin/market-returns"
+          component={MarketReturns}
+          marketReturns={marketReturns}
+          setMarketReturns={setMarketReturns}
+        />
       </Switch>
     </>
   );

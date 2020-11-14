@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useAuth0 } from "@auth0/auth0-react";
 import { IRiskFreeRate } from "../../models/RiskFreeRate";
-import {
-  getRiskFreeRates,
-  addRiskFreeRate,
-} from "../../services/RiskFreeRatefService";
+import { addRiskFreeRate } from "../../services/RiskFreeRatefService";
+
+interface IProps {
+  riskFreeRates: IRiskFreeRate[];
+  setRiskFreeRates: any;
+}
 
 const defaultRfRate: IRiskFreeRate = {
   rate: 0.0,
@@ -16,12 +18,9 @@ const defaultRfRate: IRiskFreeRate = {
   source: "",
 };
 
-const defaultRfRates: IRiskFreeRate[] = [];
-
-const RiskFreeRates = () => {
+const RiskFreeRates = ({ riskFreeRates, setRiskFreeRates }: IProps) => {
   const { getAccessTokenSilently } = useAuth0();
   const [showEditRate, setShowEditRate] = useState(false);
-  const [riskFreeRates, setRfRates] = useState(defaultRfRates);
   const [riskFreeRate, setRiskFreeRate] = useState(defaultRfRate);
 
   const addRfRate = async () => {
@@ -29,7 +28,7 @@ const RiskFreeRates = () => {
       scope: "admin",
     });
     const res = await addRiskFreeRate(token, riskFreeRate);
-    setRfRates([...riskFreeRates, res]);
+    setRiskFreeRates([...riskFreeRates, res]);
     setShowEditRate(false);
     setRiskFreeRate(defaultRfRate);
   };
@@ -40,10 +39,6 @@ const RiskFreeRates = () => {
       [event.target.name]: event.target.value,
     });
   };
-
-  useEffect(() => {
-    getRiskFreeRates().then((rfRates) => setRfRates(rfRates));
-  }, []);
 
   return (
     <Row>

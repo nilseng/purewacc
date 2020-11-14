@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
 
-import { IBranch, IProject } from "../../models/Project";
+import { IProject } from "../../models/Project";
 import InitProject from "./InitProject";
 import ProcessBar from "./ProcessBar";
 import AddBranches from "./AddBranches";
@@ -19,9 +19,7 @@ import { createProject } from "../../services/ProjectService";
 import { getRiskFreeRates } from "../../services/RiskFreeRatefService";
 import { getMarketReturns } from "../../services/MarketReturnService";
 import { getBetas } from "../../services/BetaService";
-import { IBeta } from "../../models/Beta";
-import { IMarketReturn } from "../../models/MarketReturn";
-import { IRiskFreeRate } from "../../models/RiskFreeRate";
+import { calculateCostOfEquity } from "../../services/CalculationService";
 
 const defaultProject: IProject = {
   name: "",
@@ -145,26 +143,3 @@ const ProjectTool = () => {
 };
 
 export default ProjectTool;
-
-const calculateCostOfEquity = (
-  project: IProject,
-  rfRates: IRiskFreeRate[],
-  betas: IBeta[],
-  marketReturns: IMarketReturn[]
-): number | undefined => {
-  let sumOfWeights = 0; // Variable to store total weight of project branches. I.e. total project market cap.
-  let tempProductSum = 0; // Temp variable to store the sum of weight*beta*ERP = weight*beta*(Rm-Rf)
-  const rfRate = rfRates.find((rf) => rf._id === project.rfId);
-  if (!rfRate) return undefined;
-  project.branches.forEach((branch: IBranch) => {
-    const beta = betas.find((b: IBeta) => b._id === branch.betaId);
-    const marketReturn = marketReturns.find(
-      (mr: IMarketReturn) => mr._id === branch.marketId
-    );
-    if (!beta || !marketReturn) return undefined;
-    tempProductSum +=
-      branch.weight * beta.beta * (marketReturn.return - rfRate.rate);
-    sumOfWeights += branch.weight;
-  });
-  return rfRate.rate + tempProductSum / sumOfWeights;
-};

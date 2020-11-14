@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { IBeta } from "../../models/Beta";
-import { addBeta, getBetas } from "../../services/BetaService";
+import { addBeta } from "../../services/BetaService";
 
 const defaultBeta: IBeta = {
   beta: 1.1,
@@ -14,13 +14,15 @@ const defaultBeta: IBeta = {
   source: "",
 };
 
-const defaultBetas: IBeta[] = [];
+interface IProps {
+  betas: IBeta[];
+  setBetas: any;
+}
 
-const Betas = () => {
+const Betas = ({ betas, setBetas }: IProps) => {
   const { getAccessTokenSilently } = useAuth0();
 
   const [showEditBeta, setShowEditBeta] = useState(false);
-  const [betas, setBetas] = useState(defaultBetas);
   const [beta, setBeta] = useState(defaultBeta);
 
   const handleAddBeta = async () => {
@@ -39,10 +41,6 @@ const Betas = () => {
       [event.target.name]: event.target.value,
     });
   };
-
-  useEffect(() => {
-    getBetas().then((betas) => setBetas(betas));
-  }, []);
 
   return (
     <Row>

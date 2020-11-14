@@ -3,17 +3,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { IProject } from "../../models/Project";
-
-const calculateWACC = (
-  E: number = 0,
-  Re: number = 0,
-  D: number = 0,
-  Rd: number = 0,
-  Tc: number = 0
-) => {
-  const V = E + D;
-  return V ? (E / V) * Re + (D / V) * Rd * (1 - Tc) : 0;
-};
+import { calculateWACC } from "../../services/CalculationService";
 
 interface IProps {
   project: IProject;
