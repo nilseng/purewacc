@@ -17,10 +17,12 @@ import About from "./components/About";
 import { getRiskFreeRates } from "./services/RiskFreeRatefService";
 import { getBetas } from "./services/BetaService";
 import { getMarketReturns } from "./services/MarketReturnService";
+import Analysis from "./components/Analysis";
 
 function App() {
   const { loginWithRedirect } = useAuth0();
 
+  const [project, setProject] = useState();
   const [betas, setBetas] = useState();
   const [marketReturns, setMarketReturns] = useState();
   const [riskFreeRates, setRiskFreeRates] = useState();
@@ -44,6 +46,7 @@ function App() {
             betas={betas}
             marketReturns={marketReturns}
             riskFreeRates={riskFreeRates}
+            setProject={setProject}
           />
           <PrivateRoute path="/calculator" component={WACCCalculator} />
           <PrivateRoute
@@ -55,6 +58,14 @@ function App() {
             setMarketReturns={setMarketReturns}
             riskFreeRates={riskFreeRates}
             setRiskFreeRates={setRiskFreeRates}
+          />
+          <PrivateRoute
+            path="/analysis"
+            component={Analysis}
+            project={project}
+            betas={betas}
+            marketReturns={marketReturns}
+            riskFreeRates={riskFreeRates}
           />
           <Route path="/about" component={About} />
           <Route path="/login" render={() => loginWithRedirect()} />

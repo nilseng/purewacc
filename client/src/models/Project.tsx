@@ -1,6 +1,7 @@
 import { IRiskFreeRate } from "./RiskFreeRate";
 
 export interface IProject {
+  _id?: string;
   name: string;
   rfId?: string;
   branches: IBranch[];

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,20 +13,34 @@ import { IRiskFreeRate } from "../models/RiskFreeRate";
 import { calculateCostOfEquity } from "../services/CalculationService";
 import { IBeta } from "../models/Beta";
 import { IMarketReturn } from "../models/MarketReturn";
+import Button from "react-bootstrap/Button";
 
 interface IProps {
   betas: IBeta[];
   marketReturns: IMarketReturn[];
   riskFreeRates: IRiskFreeRate[];
+  setProject: any;
 }
 
 const defaultProjects: IProject[] = [];
 
-const ProjectList = ({ betas, marketReturns, riskFreeRates }: IProps) => {
+const ProjectList = ({
+  betas,
+  marketReturns,
+  riskFreeRates,
+  setProject,
+}: IProps) => {
   const { getAccessTokenSilently } = useAuth0();
   const [token, setToken] = useState("");
 
+  const history = useHistory();
+
   const [projects, setProjects] = useState(defaultProjects);
+
+  const onAnalyse = (project: IProject) => {
+    setProject(project);
+    history.push("/analysis");
+  };
 
   useEffect(() => {
     getAccessTokenSilently().then((token) => setToken(token));
@@ -49,8 +63,23 @@ const ProjectList = ({ betas, marketReturns, riskFreeRates }: IProps) => {
       <h5>Projects</h5>
       {projects &&
         projects.map((project: IProject) => (
-          <Card bg="dark" className="border-0 rounded p-2 my-2 small">
-            <h6>{project.name}</h6>
+          <Card
+            key={project._id}
+            bg="dark"
+            className="border-0 rounded p-2 my-2 small"
+          >
+            <Row>
+              <Col className="text-right">
+                <Button size="sm" onClick={() => onAnalyse(project)}>
+                  Analyse
+                </Button>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h6>{project.name}</h6>
+              </Col>
+            </Row>
             <Row>
               <Col>
                 Rf = {riskFreeRates.find((rf) => project.rfId === rf._id)?.rate}
