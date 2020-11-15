@@ -29,10 +29,10 @@ const NavBar = () => {
               <Button
                 variant="link"
                 className="mr-2"
-                onClick={() => loginWithRedirect({})}
+                onClick={() => loginWithRedirect({ screen_hint: "signup" })}
               >
                 <FaIcon icon={faKey} style={{ marginRight: "0.4rem" }}></FaIcon>
-                Log in
+                Sign up
               </Button>
             </Nav.Item>
           )}
