@@ -8,8 +8,8 @@ import { IMarketReturn } from "../../models/MarketReturn";
 import { addMarketReturn } from "../../services/MarketReturnService";
 
 const defaultMarketReturn: IMarketReturn = {
-  return: 1.2,
-  market: "global",
+  return: 1.07,
+  market: "",
   source: "",
 };
 
@@ -58,7 +58,7 @@ const MarketReturns = ({ marketReturns, setMarketReturns }: IProps) => {
             <Form.Label className="m-1">Market Return</Form.Label>
             <Form.Control
               className="m-1"
-              name="beta"
+              name="return"
               value={mr.return}
               type="number"
               size="sm"
