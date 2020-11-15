@@ -38,7 +38,10 @@ const Betas = ({ betas, setBetas }: IProps) => {
   const handleInputChange = (event: any) => {
     setBeta({
       ...beta,
-      [event.target.name]: event.target.value,
+      [event.target.name]:
+        event.target.type === "number"
+          ? +event.target.value
+          : event.target.value,
     });
   };
 

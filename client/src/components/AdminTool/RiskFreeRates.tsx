@@ -36,7 +36,10 @@ const RiskFreeRates = ({ riskFreeRates, setRiskFreeRates }: IProps) => {
   const handleInputChange = (event: any) => {
     setRiskFreeRate({
       ...riskFreeRate,
-      [event.target.name]: event.target.value,
+      [event.target.name]:
+        event.target.type === "number"
+          ? +event.target.value
+          : event.target.value,
     });
   };
 
