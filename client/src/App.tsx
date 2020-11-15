@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { Switch, Route, Router } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import history from "./utils/history";
 
@@ -18,6 +19,8 @@ import { getBetas } from "./services/BetaService";
 import { getMarketReturns } from "./services/MarketReturnService";
 
 function App() {
+  const { loginWithRedirect } = useAuth0();
+
   const [betas, setBetas] = useState();
   const [marketReturns, setMarketReturns] = useState();
   const [riskFreeRates, setRiskFreeRates] = useState();
@@ -54,12 +57,7 @@ function App() {
             setRiskFreeRates={setRiskFreeRates}
           />
           <Route path="/about" component={About} />
-          <Route
-            path="/login"
-            render={() =>
-              (window.location.href = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize`)
-            }
-          />
+          <Route path="/login" render={() => loginWithRedirect()} />
         </Switch>
       </Container>
       <Footer />
