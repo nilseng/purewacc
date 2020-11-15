@@ -54,6 +54,12 @@ function App() {
             setRiskFreeRates={setRiskFreeRates}
           />
           <Route path="/about" component={About} />
+          <Route
+            path="/login"
+            render={() =>
+              (window.location.href = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize`)
+            }
+          />
         </Switch>
       </Container>
       <Footer />
