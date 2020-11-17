@@ -1,4 +1,6 @@
 import React from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import { IBeta } from "../models/Beta";
 import { IMarketReturn } from "../models/MarketReturn";
 import { IProject } from "../models/Project";
@@ -15,8 +17,17 @@ interface IProps {
 const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
   return (
     <>
-      <p>{JSON.stringify(project)}</p>
-      <AnalysisChart />
+      <Row>
+        <Col>
+          <AnalysisChart />
+        </Col>
+        <Col>
+          <AnalysisChart />
+        </Col>
+        <Col>
+          <AnalysisChart />
+        </Col>
+      </Row>
     </>
   );
 };

@@ -10,7 +10,11 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { IRiskFreeRate } from "../models/RiskFreeRate";
-import { calculateCostOfEquity } from "../services/CalculationService";
+import {
+  calculateCostOfEquity,
+  calculateProjectWACC,
+  calculateWACC,
+} from "../services/CalculationService";
 import { IBeta } from "../models/Beta";
 import { IMarketReturn } from "../models/MarketReturn";
 import Button from "react-bootstrap/Button";
@@ -71,7 +75,7 @@ const ProjectList = ({
             <Row>
               <Col className="text-right">
                 <Button size="sm" onClick={() => onAnalyse(project)}>
-                  Analyse
+                  Analyze
                 </Button>
               </Col>
             </Row>
@@ -81,6 +85,17 @@ const ProjectList = ({
               </Col>
             </Row>
             <Row>
+              <Col>
+                WACC ={" "}
+                {calculateProjectWACC(
+                  project,
+                  riskFreeRates,
+                  betas,
+                  marketReturns
+                )
+                  ?.toFixed(3)
+                  ?.toLocaleString()}
+              </Col>
               <Col>
                 Rf = {riskFreeRates.find((rf) => project.rfId === rf._id)?.rate}
               </Col>

@@ -14,6 +14,23 @@ export const calculateWACC = (
   return V ? (E / V) * Re + (D / V) * Rd * (1 - Tc) : 0;
 };
 
+export const calculateProjectWACC = (
+  project: IProject,
+  riskFreeRates: IRiskFreeRate[],
+  betas: IBeta[],
+  marketReturns: IMarketReturn[]
+) => {
+  const E = project.equity ? project.equity : 0;
+  let Re = calculateCostOfEquity(project, riskFreeRates, betas, marketReturns);
+  Re = Re ? Re : 0;
+  const D = project.debt ? project.debt : 0;
+  const Rd = project.costOfDebt ? project.costOfDebt : 0;
+  const Tc = project.tax ? project.tax : 0;
+
+  const V = E + D;
+  return V ? (E / V) * Re + (D / V) * Rd * (1 - Tc) : 0;
+};
+
 export const calculateCostOfEquity = (
   project: IProject,
   rfRates: IRiskFreeRate[],
