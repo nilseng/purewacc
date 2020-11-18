@@ -3,5 +3,7 @@ export interface IBeta {
     beta: number
     industry: string
     source: string
+    description?: string
+    credit?: string
     createdAt?: number
 }
