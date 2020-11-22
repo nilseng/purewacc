@@ -34,7 +34,7 @@ const AddBranches = ({
         {
           id: uuidv4(),
           name: "",
-          weight: 0,
+          weight: "",
           industry: "",
           region: "",
         },
