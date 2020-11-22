@@ -72,16 +72,10 @@ const ProjectList = ({
             className="border-0 rounded p-2 my-2 small"
           >
             <Row>
-              <Col className="text-right">
-                <Button size="sm" onClick={() => onAnalyse(project)}>
-                  Analyze
-                </Button>
-              </Col>
-            </Row>
-            <Row>
               <Col>
                 <h6>{project.name}</h6>
               </Col>
+              <Col className="text-right"></Col>
             </Row>
             <Row>
               <Col>
@@ -113,6 +107,18 @@ const ProjectList = ({
               <Col>D = {project.debt}</Col>
               <Col>Rd = {project.costOfDebt}</Col>
               <Col>Tc = {project.tax}</Col>
+            </Row>
+            <Row>
+              <Col>
+                <Button
+                  variant="link"
+                  size="sm"
+                  className="px-0"
+                  onClick={() => onAnalyse(project)}
+                >
+                  Analyze
+                </Button>
+              </Col>
             </Row>
           </Card>
         ))}
