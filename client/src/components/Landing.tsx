@@ -8,14 +8,6 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 const Landing = () => {
   return (
     <div className="py-4">
-      <Link
-        to="/project-tool"
-        className="btn btn-outline-primary text-light mb-4"
-        style={{ textDecoration: "none" }}
-      >
-        <FaIcon icon={faPlus} className="mr-2"></FaIcon>
-        New Project
-      </Link>
       <Jumbotron className="bg-dark">
         <h5>Welcome to Pure WACC</h5>
         <p>
@@ -24,6 +16,14 @@ const Landing = () => {
           manner. Feel free to try creating a project to get a feel of how it
           will work.
         </p>
+        <Link
+          to="/project-tool"
+          className="btn btn-outline-primary text-light mb-4"
+          style={{ textDecoration: "none" }}
+        >
+          <FaIcon icon={faPlus} className="mr-2"></FaIcon>
+          New Project
+        </Link>
       </Jumbotron>
     </div>
   );
