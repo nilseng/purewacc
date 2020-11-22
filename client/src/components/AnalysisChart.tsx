@@ -1,5 +1,5 @@
 import React from "react";
-import ChartComponent, { Line, Bar, Doughnut } from "react-chartjs-2";
+import ChartComponent from "react-chartjs-2";
 
 interface IProps {
   chartType?: ChartTypes;

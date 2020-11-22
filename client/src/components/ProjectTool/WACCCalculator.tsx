@@ -36,6 +36,9 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
             <Form.Control
               name="equity"
               type="number"
+              value={
+                !project.equity && project.equity !== 0 ? "" : project.equity
+              }
               size="sm"
               required
               onChange={handleInputChange}
@@ -57,6 +60,7 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
             <Form.Control
               name="debt"
               type="number"
+              value={!project.debt && project.debt !== 0 ? "" : project.debt}
               size="sm"
               required
               onChange={handleInputChange}
@@ -70,6 +74,11 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
             <Form.Control
               name="costOfDebt"
               type="number"
+              value={
+                !project.costOfDebt && project.costOfDebt !== 0
+                  ? ""
+                  : project.costOfDebt
+              }
               size="sm"
               required
               onChange={handleInputChange}
@@ -84,6 +93,7 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
             <Form.Control
               name="tax"
               type="number"
+              value={!project.tax && project.tax !== 0 ? "" : project.tax}
               size="sm"
               required
               onChange={handleInputChange}

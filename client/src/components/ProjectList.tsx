@@ -13,7 +13,6 @@ import { IRiskFreeRate } from "../models/RiskFreeRate";
 import {
   calculateCostOfEquity,
   calculateProjectWACC,
-  calculateWACC,
 } from "../services/CalculationService";
 import { IBeta } from "../models/Beta";
 import { IMarketReturn } from "../models/MarketReturn";

@@ -23,9 +23,7 @@ import { calculateCostOfEquity } from "../../services/CalculationService";
 
 const defaultProject: IProject = {
   name: "",
-  branches: [
-    { id: uuidv4(), name: "", weight: 0, industry: "all", region: "global" },
-  ],
+  branches: [{ id: uuidv4(), name: "", weight: "", industry: "", region: "" }],
 };
 
 const projectProcess = ["initProject", "addBranches", "WACC"];
@@ -47,7 +45,7 @@ const ProjectTool = () => {
     setProject({
       ...project,
       [event.target.name]:
-        event.target.type === "number"
+        event.target.type === "number" && event.target.value
           ? +event.target.value
           : event.target.value,
     });

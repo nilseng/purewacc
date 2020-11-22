@@ -46,7 +46,8 @@ export const calculateCostOfEquity = (
     const marketReturn = marketReturns.find(
       (mr: IMarketReturn) => mr._id === branch.marketId
     );
-    if (!beta || !marketReturn) return undefined;
+    if (typeof branch.weight !== "number" || !beta || !marketReturn)
+      return undefined;
     tempProductSum +=
       branch.weight * beta.beta * (marketReturn.return - rfRate.rate);
     sumOfWeights += branch.weight;

@@ -16,7 +16,7 @@ export interface IProject {
 export interface IBranch {
   id: string;
   name: string;
-  weight: number;
+  weight: number | "";
   weightUnit?: string;
   industry?: string;
   betaId?: string;

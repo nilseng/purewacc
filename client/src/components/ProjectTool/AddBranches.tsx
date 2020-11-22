@@ -35,8 +35,8 @@ const AddBranches = ({
           id: uuidv4(),
           name: "",
           weight: 0,
-          industry: "all",
-          region: "global",
+          industry: "",
+          region: "",
         },
       ],
     });
@@ -53,7 +53,7 @@ const AddBranches = ({
     const updatedBranch = {
       ...branch,
       [event.target.name]:
-        event.target.type === "number"
+        event.target.type === "number" && event.target.value
           ? +event.target.value
           : event.target.value,
     };
@@ -97,7 +97,9 @@ const AddBranches = ({
                     type="number"
                     size="sm"
                     name="weight"
-                    value={branch.weight}
+                    value={
+                      !branch.weight && branch.weight !== 0 ? "" : branch.weight
+                    }
                     title="Size should ideally be measured by Market Capitalization. Revenue or other figures can be used as a proxy for Market Cap."
                     required
                     onChange={(e) => handleInputChange(e, branch)}
