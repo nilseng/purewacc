@@ -3,7 +3,7 @@ import ChartComponent from "react-chartjs-2";
 
 interface IProps {
   chartType?: ChartTypes;
-  data: any;
+  config: any;
 }
 
 export enum ChartTypes {
@@ -12,8 +12,15 @@ export enum ChartTypes {
   Doughnut = "doughnut",
 }
 
-const AnalysisChart = ({ chartType, data }: IProps) => {
-  return <ChartComponent data={data} type={chartType || ChartTypes.Line} />;
+const AnalysisChart = ({ chartType, config }: IProps) => {
+  return (
+    <ChartComponent
+      height={240}
+      data={config.data}
+      options={config.options}
+      type={chartType || ChartTypes.Line}
+    />
+  );
 };
 
 export default AnalysisChart;
