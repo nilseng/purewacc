@@ -18,28 +18,7 @@ const ProcessBar = ({ steps, currentStep }: IProps) => {
               borderBottom: "3px solid",
               borderColor: currentStep >= i ? "#17a2b8" : "#868e96",
             }}
-          >
-            <svg width="60" height="60" viewBox="0 0 100 100">
-              <circle
-                cx="50"
-                cy="50"
-                r="44"
-                stroke={currentStep >= i ? "#17a2b8" : "#868e96"}
-                strokeWidth="6"
-              />
-              <text
-                x="50%"
-                y="50%"
-                fontSize="2em"
-                textAnchor="middle"
-                dy="0.3em"
-                stroke={currentStep > i ? "#17a2b8" : "#868e96"}
-                fill={currentStep > i ? "#17a2b8" : "#868e96"}
-              >
-                {i + 1}
-              </text>
-            </svg>
-          </div>
+          ></div>
         </Col>
       ))}
     </Row>
