@@ -20,13 +20,6 @@ app.use(
 app.use(bodyParser.json())
 app.use(morgan("tiny"))
 
-app.use((req, res, next) => {
-    if (!req.secure && req.headers.host !== `localhost:${process.env.PORT || 4000}`) {
-        return res.redirect("https://" + req.headers.host + req.path);
-    }
-    next();
-});
-
 app.use("/project", projectRouter)
 app.use("/api", adminRouter)
 
