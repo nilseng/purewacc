@@ -3,6 +3,7 @@ import path from 'path'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
+import sslRedirect from 'heroku-ssl-redirect'
 
 import connectToMongoDb from "../database/databaseSetup"
 import adminRouter from './routes/admin'
@@ -11,6 +12,8 @@ import projectRouter from './routes/project'
 dotenv.config()
 
 const app = express()
+
+app.use(sslRedirect())
 
 app.use(
     bodyParser.urlencoded({
