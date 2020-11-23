@@ -30,6 +30,20 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
       : undefined
   );
 
+  const toolTipConfig = {
+    callbacks: {
+      label: (tooltipItem: any, data: any) => {
+        let label = data.datasets[tooltipItem.datasetIndex].label || "";
+
+        if (label) {
+          label += ": ";
+        }
+        label += tooltipItem?.yLabel?.toFixed(4);
+        return label;
+      },
+    },
+  };
+
   const financingMixChartConfig = project
     ? {
         data: {
@@ -63,7 +77,7 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           ),
           datasets: [
             {
-              label: "WACC by Equity",
+              label: "WACC",
               borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
               backgroundColor: "rgba(75,192,192,0)",
@@ -116,6 +130,7 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
               },
             ],
           },
+          tooltips: toolTipConfig,
         },
       }
     : undefined;
@@ -128,7 +143,7 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           ),
           datasets: [
             {
-              label: "WACC by Debt",
+              label: "WACC",
               borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
               backgroundColor: "rgba(75,192,192,0)",
@@ -181,6 +196,232 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
               },
             ],
           },
+          tooltips: toolTipConfig,
+        },
+      }
+    : undefined;
+
+  const costOfEquityChartConfig = project
+    ? {
+        data: {
+          labels: Array.from(Array(11).keys()).map(
+            (i) => ((costOfEquity || 0) * i * 2) / 10
+          ),
+          datasets: [
+            {
+              label: "WACC",
+              borderWidth: 1,
+              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,192,192,0)",
+              pointRadius: 2,
+              pointBackgroundColor: "rgba(75,192,192,1)",
+              data: Array.from(Array(11).keys()).map((i) =>
+                calculateWACC(
+                  project.equity,
+                  ((costOfEquity || 0) * i * 2) / 10,
+                  project.debt,
+                  project.costOfDebt,
+                  project.tax
+                )
+              ),
+            },
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: "WACC by Cost of Equity",
+          },
+          legend: {
+            display: false,
+          },
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Cost of Equity",
+                },
+                ticks: {
+                  callback: (
+                    value: number,
+                    index: number,
+                    values: number[]
+                  ) => {
+                    return value.toFixed(3);
+                  },
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "WACC",
+                },
+                ticks: {
+                  beginAtZero: true,
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+          },
+          tooltips: toolTipConfig,
+        },
+      }
+    : undefined;
+
+  const costOfDebtChartConfig = project
+    ? {
+        data: {
+          labels: Array.from(Array(11).keys()).map(
+            (i) => ((project.costOfDebt || 0) * i * 2) / 10
+          ),
+          datasets: [
+            {
+              label: "WACC",
+              borderWidth: 1,
+              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,192,192,0)",
+              pointRadius: 2,
+              pointBackgroundColor: "rgba(75,192,192,1)",
+              data: Array.from(Array(11).keys()).map((i) =>
+                calculateWACC(
+                  project.equity,
+                  costOfEquity,
+                  project.debt,
+                  ((project.costOfDebt || 0) * i * 2) / 10,
+                  project.tax
+                )
+              ),
+            },
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: "WACC by Cost of Debt",
+          },
+          legend: {
+            display: false,
+          },
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Cost of Debt",
+                },
+                ticks: {
+                  callback: (
+                    value: number,
+                    index: number,
+                    values: number[]
+                  ) => {
+                    return value.toFixed(3);
+                  },
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "WACC",
+                },
+                ticks: {
+                  beginAtZero: true,
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+          },
+          tooltips: toolTipConfig,
+        },
+      }
+    : undefined;
+
+  const taxChartConfig = project
+    ? {
+        data: {
+          labels: Array.from(Array(11).keys()).map(
+            (i) => ((project.tax || 0) * i * 2) / 10
+          ),
+          datasets: [
+            {
+              label: "WACC",
+              borderWidth: 1,
+              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,192,192,0)",
+              pointRadius: 2,
+              pointBackgroundColor: "rgba(75,192,192,1)",
+              data: Array.from(Array(11).keys()).map((i) =>
+                calculateWACC(
+                  project.equity,
+                  costOfEquity,
+                  project.debt,
+                  project.costOfDebt,
+                  ((project.tax || 0) * i * 2) / 10
+                )
+              ),
+            },
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: "WACC by Tax Rate",
+          },
+          legend: {
+            display: false,
+          },
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Tax Rate",
+                },
+                ticks: {
+                  callback: (
+                    value: number,
+                    index: number,
+                    values: number[]
+                  ) => {
+                    return value.toFixed(3);
+                  },
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "WACC",
+                },
+                ticks: {
+                  beginAtZero: true,
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+          },
+          tooltips: toolTipConfig,
         },
       }
     : undefined;
@@ -223,6 +464,19 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
         </Col>
         <Col sm={4}>
           {debtChartConfig && <AnalysisChart config={debtChartConfig} />}
+        </Col>
+        <Col sm={4}>
+          {costOfEquityChartConfig && (
+            <AnalysisChart config={costOfEquityChartConfig} />
+          )}
+        </Col>
+        <Col sm={4}>
+          {costOfDebtChartConfig && (
+            <AnalysisChart config={costOfDebtChartConfig} />
+          )}
+        </Col>
+        <Col sm={4}>
+          {taxChartConfig && <AnalysisChart config={taxChartConfig} />}
         </Col>
       </Row>
     </>
