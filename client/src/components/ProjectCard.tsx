@@ -57,16 +57,18 @@ const ProjectCard = ({
         </Col>
       </Row>
       <Row className="text-muted">
-        <Col>Equity = {project.equity}</Col>
-        <Col>
+        <Col sm={3}>Equity = {project.equity}</Col>
+        <Col sm={3}>
           Cost of Equity ={" "}
           {calculateCostOfEquity(project, riskFreeRates, betas, marketReturns)
             ?.toFixed(3)
             ?.toLocaleString()}
         </Col>
-        <Col>Debt = {project.debt}</Col>
-        <Col>Cost of Debt = {project.costOfDebt}</Col>
-        <Col>Corporate Tax = {project.tax}</Col>
+      </Row>
+      <Row className="text-muted">
+        <Col sm={3}>Debt = {project.debt}</Col>
+        <Col sm={3}>Cost of Debt = {project.costOfDebt}</Col>
+        <Col sm={3}>Corporate Tax = {project.tax}</Col>
       </Row>
       {setProject && (
         <Row>
