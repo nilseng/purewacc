@@ -45,28 +45,28 @@ const ProjectCard = ({
         <Col>
           <h6>{project.name}</h6>
         </Col>
-        <Col className="text-right"></Col>
       </Row>
       <Row>
-        <Col>
-          WACC ={" "}
-          {calculateProjectWACC(project, riskFreeRates, betas, marketReturns)
-            ?.toFixed(3)
-            ?.toLocaleString()}
+        <Col className="d-flex flex-direction-row">
+          <b>
+            WACC ={" "}
+            {calculateProjectWACC(project, riskFreeRates, betas, marketReturns)
+              ?.toFixed(3)
+              ?.toLocaleString()}
+          </b>
         </Col>
+      </Row>
+      <Row>
+        <Col>Equity = {project.equity}</Col>
         <Col>
-          Rf = {riskFreeRates.find((rf) => project.rfId === rf._id)?.rate}
-        </Col>
-        <Col>E = {project.equity}</Col>
-        <Col>
-          Re ={" "}
+          Cost of Equity ={" "}
           {calculateCostOfEquity(project, riskFreeRates, betas, marketReturns)
             ?.toFixed(3)
             ?.toLocaleString()}
         </Col>
-        <Col>D = {project.debt}</Col>
-        <Col>Rd = {project.costOfDebt}</Col>
-        <Col>Tc = {project.tax}</Col>
+        <Col>Debt = {project.debt}</Col>
+        <Col>Cost of Debt = {project.costOfDebt}</Col>
+        <Col>Corporate Tax = {project.tax}</Col>
       </Row>
       {setProject && (
         <Row>
