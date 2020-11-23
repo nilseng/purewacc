@@ -30,6 +30,62 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
       : undefined
   );
 
+  const equityChartConfig = project
+    ? {
+        data: {
+          labels: Array.from(Array(11).keys()).map(
+            (i) => ((project.equity || 0) * i * 2) / 10
+          ),
+          datasets: [
+            {
+              label: "WACC by Equity",
+              borderColor: "rgba(75,192,192,1)",
+              backgroundColor: "rgba(75,192,192,0.5)",
+              data: Array.from(Array(11).keys()).map((i) =>
+                calculateWACC(
+                  ((project.equity || 0) * i * 2) / 10,
+                  costOfEquity,
+                  project.debt,
+                  project.costOfDebt,
+                  project.tax
+                )
+              ),
+            },
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: "WACC by Equity",
+          },
+          legend: {
+            display: false,
+          },
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Equity",
+                },
+              },
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: "WACC",
+                },
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      }
+    : undefined;
+
   const debtChartConfig = project
     ? {
         data: {
@@ -111,6 +167,9 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
         </Col>
       </Row>
       <Row>
+        <Col sm={4}>
+          {equityChartConfig && <AnalysisChart config={equityChartConfig} />}
+        </Col>
         <Col sm={4}>
           {debtChartConfig && <AnalysisChart config={debtChartConfig} />}
         </Col>
