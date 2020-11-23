@@ -12,7 +12,7 @@ import {
   calculateCostOfEquity,
   calculateWACC,
 } from "../services/CalculationService";
-import AnalysisChart from "./AnalysisChart";
+import AnalysisChart, { ChartTypes } from "./AnalysisChart";
 import ProjectCard from "./ProjectCard";
 import { faList } from "@fortawesome/free-solid-svg-icons";
 
@@ -30,6 +30,31 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
       : undefined
   );
 
+  const financingMixChartConfig = project
+    ? {
+        data: {
+          labels: ["Equity", "Debt"],
+          datasets: [
+            {
+              label: "Financing mix",
+              borderColor: "rgba(75,192,192,0)",
+              backgroundColor: ["rgba(75,192,192,0.8)", "rgba(0,150,192,0.8)"],
+              data: [project.equity, project.debt],
+            },
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: "Financing mix",
+          },
+          legend: {
+            position: "bottom",
+          },
+        },
+      }
+    : undefined;
+
   const equityChartConfig = project
     ? {
         data: {
@@ -39,8 +64,11 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           datasets: [
             {
               label: "WACC by Equity",
+              borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
-              backgroundColor: "rgba(75,192,192,0.5)",
+              backgroundColor: "rgba(75,192,192,0)",
+              pointRadius: 2,
+              pointBackgroundColor: "rgba(75,192,192,1)",
               data: Array.from(Array(11).keys()).map((i) =>
                 calculateWACC(
                   ((project.equity || 0) * i * 2) / 10,
@@ -68,6 +96,9 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
                   display: true,
                   labelString: "Equity",
                 },
+                gridLines: {
+                  display: false,
+                },
               },
             ],
             yAxes: [
@@ -78,6 +109,9 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
                 },
                 ticks: {
                   beginAtZero: true,
+                },
+                gridLines: {
+                  display: false,
                 },
               },
             ],
@@ -95,8 +129,11 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           datasets: [
             {
               label: "WACC by Debt",
+              borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
-              backgroundColor: "rgba(75,192,192,0.5)",
+              backgroundColor: "rgba(75,192,192,0)",
+              pointRadius: 2,
+              pointBackgroundColor: "rgba(75,192,192,1)",
               data: Array.from(Array(11).keys()).map((i) =>
                 calculateWACC(
                   project.equity,
@@ -124,6 +161,9 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
                   display: true,
                   labelString: "Debt",
                 },
+                gridLines: {
+                  display: false,
+                },
               },
             ],
             yAxes: [
@@ -134,6 +174,9 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
                 },
                 ticks: {
                   beginAtZero: true,
+                },
+                gridLines: {
+                  display: false,
                 },
               },
             ],
@@ -167,6 +210,14 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
         </Col>
       </Row>
       <Row>
+        <Col sm={4}>
+          {financingMixChartConfig && (
+            <AnalysisChart
+              config={financingMixChartConfig}
+              chartType={ChartTypes.Doughnut}
+            />
+          )}
+        </Col>
         <Col sm={4}>
           {equityChartConfig && <AnalysisChart config={equityChartConfig} />}
         </Col>
