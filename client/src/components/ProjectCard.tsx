@@ -46,7 +46,7 @@ const ProjectCard = ({
           <h6>{project.name}</h6>
         </Col>
       </Row>
-      <Row>
+      <Row className="my-2">
         <Col className="d-flex flex-direction-row">
           <b>
             WACC ={" "}
@@ -56,7 +56,7 @@ const ProjectCard = ({
           </b>
         </Col>
       </Row>
-      <Row>
+      <Row className="text-muted">
         <Col>Equity = {project.equity}</Col>
         <Col>
           Cost of Equity ={" "}
