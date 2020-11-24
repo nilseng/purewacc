@@ -23,7 +23,7 @@ router.get("/all", checkJwt, async (req: any, res) => {
 
 router.delete("/", checkJwt, async (req: any, res) => {
     if (!req.body?._id) return res.status(400).json({ error: "No project id received by server." })
-    const doc = await projectCollection.findOneAndDelete({ _id: new ObjectID(req.body._id) })
+    const doc = await projectCollection.findOneAndDelete({ _id: new ObjectID(req.body._id), createdBy: req.user.sub })
     res.status(200).json(doc)
 })
 
