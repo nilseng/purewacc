@@ -11,8 +11,10 @@ const chartConfig = {
     datasets: [
       {
         label: "Value",
-        borderColor: "rgba(75,192,192,1)",
-        backgroundColor: ["rgba(75,192,192,0.5)", "rgba(0,150,192,0.5)"],
+        pointRadius: 0,
+        borderColor: ["rgba(75,192,192,1)", "rgba(0,150,192,1)"],
+        borderWidth: 1,
+        backgroundColor: ["rgba(75,192,192,0.2)", "rgba(0,150,192,0.2)"],
         data: [27635, 12456],
       },
     ],
@@ -54,26 +56,19 @@ const Landing = () => {
           <li>High quality betas, equity risk premiums and other data</li>
           <li>
             Analytics and insights
-            <Row>
-              <Col>
+            <Row className="my-4">
+              <Col md={4}>
                 <AnalysisChart
                   chartType={ChartTypes.Doughnut}
                   config={chartConfig}
-                  height={100}
+                  height={80}
                 />
               </Col>
-              <Col>
-                <AnalysisChart
-                  chartType={ChartTypes.Line}
-                  config={chartConfig}
-                  height={100}
-                />
-              </Col>
-              <Col>
+              <Col md={4}>
                 <AnalysisChart
                   chartType={ChartTypes.Bar}
                   config={chartConfig}
-                  height={100}
+                  height={80}
                 />
               </Col>
             </Row>
