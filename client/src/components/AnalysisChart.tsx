@@ -4,6 +4,7 @@ import ChartComponent from "react-chartjs-2";
 interface IProps {
   chartType?: ChartTypes;
   config: any;
+  height?: number;
 }
 
 export enum ChartTypes {
@@ -12,10 +13,10 @@ export enum ChartTypes {
   Doughnut = "doughnut",
 }
 
-const AnalysisChart = ({ chartType, config }: IProps) => {
+const AnalysisChart = ({ chartType, config, height }: IProps) => {
   return (
     <ChartComponent
-      height={240}
+      height={height || 240}
       data={config.data}
       options={config.options}
       type={chartType || ChartTypes.Line}
