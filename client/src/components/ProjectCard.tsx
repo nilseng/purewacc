@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faChartLine, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import { IBeta } from "../models/Beta";
 import { IMarketReturn } from "../models/MarketReturn";
@@ -15,6 +15,8 @@ import {
   calculateCostOfEquity,
   calculateProjectWACC,
 } from "../services/CalculationService";
+import { useAuth0 } from "@auth0/auth0-react";
+import { deleteProject } from "../services/ProjectService";
 
 interface IProps {
   project: IProject;
@@ -22,6 +24,8 @@ interface IProps {
   marketReturns: IMarketReturn[];
   riskFreeRates: IRiskFreeRate[];
   setProject?: any;
+  projects?: IProject[];
+  setProjects?: any;
 }
 
 const ProjectCard = ({
@@ -30,7 +34,11 @@ const ProjectCard = ({
   betas,
   marketReturns,
   riskFreeRates,
+  projects,
+  setProjects,
 }: IProps) => {
+  const { getAccessTokenSilently } = useAuth0();
+
   const onAnalyse = (project: IProject) => {
     setProject(project);
     history.push("/analysis");
@@ -39,6 +47,15 @@ const ProjectCard = ({
   const onEditProject = (project: IProject) => {
     setProject(project);
     history.push("/project-tool");
+  };
+
+  const onDeleteProject = async (project: IProject) => {
+    const token = await getAccessTokenSilently();
+    if (project._id) {
+      await deleteProject(token, project._id);
+      if (setProjects && projects)
+        setProjects(projects.filter((p) => p._id !== project._id));
+    }
   };
 
   const history = useHistory();
@@ -84,7 +101,7 @@ const ProjectCard = ({
             <Button
               variant="link"
               size="sm"
-              className="text-info px-0"
+              className="text-info"
               onClick={() => onEditProject(project)}
             >
               <FaIcon className="mx-1" icon={faPen} />
@@ -93,6 +110,15 @@ const ProjectCard = ({
             <Button variant="link" size="sm" onClick={() => onAnalyse(project)}>
               <FaIcon className="mx-1" icon={faChartLine} />
               Analyze
+            </Button>
+            <Button
+              className="text-secondary"
+              variant="link"
+              size="sm"
+              onClick={() => onDeleteProject(project)}
+            >
+              <FaIcon className="mx-1" icon={faTrash} />
+              Delete
             </Button>
           </Col>
         </Row>

@@ -20,3 +20,15 @@ export const createProject = async (token: any, project: IProject) => {
     })
     return res.json()
 }
+
+export const deleteProject = async (token: any, projectId: string) => {
+    const res = await fetch("/project", {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ _id: projectId })
+    })
+    return res.json()
+}
