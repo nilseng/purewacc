@@ -51,8 +51,9 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           datasets: [
             {
               label: "Financing mix",
-              borderColor: "rgba(75,192,192,0)",
-              backgroundColor: ["rgba(75,192,192,0.8)", "rgba(0,150,192,0.8)"],
+              borderColor: ["rgba(75,192,192,1)", "rgba(0,150,192,1)"],
+              borderWidth: 1,
+              backgroundColor: ["rgba(75,192,192,0.2)", "rgba(0,150,192,0.2)"],
               data: [project.equity, project.debt],
             },
           ],
