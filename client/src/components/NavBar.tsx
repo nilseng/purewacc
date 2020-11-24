@@ -13,7 +13,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import AnimatedLogo from "./AnimatedLogo";
 
-const NavBar = () => {
+interface IProps {
+  resetProject: any;
+}
+
+const NavBar = ({ resetProject }: IProps) => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (
@@ -68,6 +72,7 @@ const NavBar = () => {
                 href="/project-tool"
                 className="btn btn-sm btn-outline-primary text-light mr-sm-4"
                 style={{ textDecoration: "none" }}
+                onClick={resetProject}
               >
                 <FaIcon icon={faPlus} className="mr-2"></FaIcon>
                 New Project

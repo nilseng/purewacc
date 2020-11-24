@@ -6,7 +6,6 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from "uuid";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useHistory } from "react-router-dom";
 
@@ -21,18 +20,17 @@ import { getMarketReturns } from "../../services/MarketReturnService";
 import { getBetas } from "../../services/BetaService";
 import { calculateCostOfEquity } from "../../services/CalculationService";
 
-const defaultProject: IProject = {
-  name: "",
-  branches: [{ id: uuidv4(), name: "", weight: "", industry: "", region: "" }],
-};
-
 const projectProcess = ["initProject", "addBranches", "WACC"];
 
-const ProjectTool = () => {
+interface IProps {
+  project: IProject;
+  setProject: any;
+}
+
+const ProjectTool = ({ project, setProject }: IProps) => {
   const { getAccessTokenSilently } = useAuth0();
   const history = useHistory();
 
-  const [project, setProject] = useState(defaultProject);
   const [currentStep, setCurrenStep] = useState(0);
   const [rfRates, setRfRates] = useState([]);
   const [betas, setBetas] = useState([]);

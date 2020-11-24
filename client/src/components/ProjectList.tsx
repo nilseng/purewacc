@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import { IProject } from "../models/Project";
 import { getProjects } from "../services/ProjectService";
@@ -41,14 +38,6 @@ const ProjectList = ({
 
   return (
     <>
-      <Link
-        to="/project-tool"
-        className="btn btn-outline-primary text-light my-4"
-        style={{ textDecoration: "none" }}
-      >
-        <FaIcon icon={faPlus} className="mr-2"></FaIcon>
-        New Project
-      </Link>
       <h5>Projects</h5>
       {projects &&
         projects.map((project: IProject) => (

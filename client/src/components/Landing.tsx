@@ -1,12 +1,9 @@
 import React from "react";
-import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
-import { Link } from "react-router-dom";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import AnalysisChart, { ChartTypes } from "./AnalysisChart";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+
+import AnalysisChart, { ChartTypes } from "./AnalysisChart";
 
 const chartConfig = {
   data: {

@@ -17,8 +17,7 @@ const SetRiskFreeRate = ({ project, handleInputChange, rfRates }: IProps) => {
         name="rfId"
         as="select"
         size="sm"
-        value={project.rfId}
-        defaultValue="default"
+        value={project.rfId || "default"}
         onChange={handleInputChange}
       >
         <option disabled value="default">

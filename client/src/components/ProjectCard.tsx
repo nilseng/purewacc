@@ -4,6 +4,9 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon as FaIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faChartLine } from "@fortawesome/free-solid-svg-icons";
+
 import { IBeta } from "../models/Beta";
 import { IMarketReturn } from "../models/MarketReturn";
 import { IProject } from "../models/Project";
@@ -31,6 +34,11 @@ const ProjectCard = ({
   const onAnalyse = (project: IProject) => {
     setProject(project);
     history.push("/analysis");
+  };
+
+  const onEditProject = (project: IProject) => {
+    setProject(project);
+    history.push("/project-tool");
   };
 
   const history = useHistory();
@@ -76,9 +84,14 @@ const ProjectCard = ({
             <Button
               variant="link"
               size="sm"
-              className="px-0"
-              onClick={() => onAnalyse(project)}
+              className="text-info px-0"
+              onClick={() => onEditProject(project)}
             >
+              <FaIcon className="mx-1" icon={faPen} />
+              Edit
+            </Button>
+            <Button variant="link" size="sm" onClick={() => onAnalyse(project)}>
+              <FaIcon className="mx-1" icon={faChartLine} />
               Analyze
             </Button>
           </Col>

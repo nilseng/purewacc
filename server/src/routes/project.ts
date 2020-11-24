@@ -1,4 +1,5 @@
 import express from 'express'
+import { ObjectID } from 'mongodb'
 
 import { projectCollection } from "../../database/databaseSetup"
 import { checkJwt } from '../auth/auth'
@@ -9,7 +10,9 @@ router.post("/", checkJwt, async (req: any, res) => {
     const project = req.body
     project.createdAt = Date.now()
     project.createdBy = req.user.sub
-    const doc = await projectCollection.insertOne(project)
+    const projectId = project._id ? new ObjectID(project._id) : ''
+    delete project._id
+    const doc = await projectCollection.replaceOne({ _id: projectId }, project, { upsert: true })
     res.status(200).json(doc.ops[0])
 })
 

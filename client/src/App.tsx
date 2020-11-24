@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { Switch, Route, Router } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { v4 as uuidv4 } from "uuid";
 
 import history from "./utils/history";
 
@@ -18,14 +19,24 @@ import { getRiskFreeRates } from "./services/RiskFreeRatefService";
 import { getBetas } from "./services/BetaService";
 import { getMarketReturns } from "./services/MarketReturnService";
 import Analysis from "./components/Analysis";
+import { IProject } from "./models/Project";
+
+const defaultProject: IProject = {
+  name: "",
+  branches: [{ id: uuidv4(), name: "", weight: "", industry: "", region: "" }],
+};
 
 function App() {
   const { loginWithRedirect } = useAuth0();
 
-  const [project, setProject] = useState();
+  const [project, setProject] = useState(defaultProject);
   const [betas, setBetas] = useState();
   const [marketReturns, setMarketReturns] = useState();
   const [riskFreeRates, setRiskFreeRates] = useState();
+
+  const resetProject = () => {
+    setProject(defaultProject);
+  };
 
   useEffect(() => {
     getBetas().then((betas) => setBetas(betas));
@@ -35,11 +46,16 @@ function App() {
 
   return (
     <Router history={history}>
-      <NavBar />
+      <NavBar resetProject={resetProject} />
       <Container style={{ minHeight: "calc(100vh - 260px)" }}>
         <Switch>
           <Route path="/" exact component={Landing} />
-          <PrivateRoute path="/project-tool" component={ProjectTool} />
+          <PrivateRoute
+            path="/project-tool"
+            component={ProjectTool}
+            project={project}
+            setProject={setProject}
+          />
           <PrivateRoute
             path="/projects"
             component={ProjectList}

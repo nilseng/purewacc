@@ -116,8 +116,7 @@ const AddBranches = ({
                     type="text"
                     size="sm"
                     name="betaId"
-                    value={branch.betaId}
-                    defaultValue="default"
+                    value={branch.betaId || "default"}
                     required
                     onChange={(e) => handleInputChange(e, branch)}
                   >
@@ -153,8 +152,7 @@ const AddBranches = ({
                     type="text"
                     size="sm"
                     name="marketId"
-                    value={branch.marketId}
-                    defaultValue="default"
+                    value={branch.marketId || "default"}
                     required
                     onChange={(e) => handleInputChange(e, branch)}
                   >
