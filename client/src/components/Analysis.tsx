@@ -41,6 +41,7 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
         label += tooltipItem?.yLabel?.toFixed(4);
         return label;
       },
+      title: () => {},
     },
   };
 
@@ -78,11 +79,28 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           ),
           datasets: [
             {
+              label: "Current WACC",
+              pointRadius: 4,
+              pointBackgroundColor: "rgba(0,150,192,1)",
+              data: [
+                {
+                  x: project.equity,
+                  y: calculateWACC(
+                    project.equity,
+                    costOfEquity,
+                    project.debt,
+                    project.costOfDebt,
+                    project.tax
+                  ),
+                },
+              ],
+            },
+            {
               label: "WACC",
               borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
               backgroundColor: "rgba(75,192,192,0)",
-              pointRadius: 2,
+              pointRadius: 1,
               pointBackgroundColor: "rgba(75,192,192,1)",
               data: Array.from(Array(11).keys()).map((i) =>
                 calculateWACC(
@@ -144,11 +162,28 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           ),
           datasets: [
             {
+              label: "Current WACC",
+              pointRadius: 4,
+              pointBackgroundColor: "rgba(0,150,192,1)",
+              data: [
+                {
+                  x: project.debt,
+                  y: calculateWACC(
+                    project.equity,
+                    costOfEquity,
+                    project.debt,
+                    project.costOfDebt,
+                    project.tax
+                  ),
+                },
+              ],
+            },
+            {
               label: "WACC",
               borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
               backgroundColor: "rgba(75,192,192,0)",
-              pointRadius: 2,
+              pointRadius: 1,
               pointBackgroundColor: "rgba(75,192,192,1)",
               data: Array.from(Array(11).keys()).map((i) =>
                 calculateWACC(
@@ -210,11 +245,28 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           ),
           datasets: [
             {
+              label: "Current WACC",
+              pointRadius: 4,
+              pointBackgroundColor: "rgba(0,150,192,1)",
+              data: [
+                {
+                  x: costOfEquity,
+                  y: calculateWACC(
+                    project.equity,
+                    costOfEquity,
+                    project.debt,
+                    project.costOfDebt,
+                    project.tax
+                  ),
+                },
+              ],
+            },
+            {
               label: "WACC",
               borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
               backgroundColor: "rgba(75,192,192,0)",
-              pointRadius: 2,
+              pointRadius: 1,
               pointBackgroundColor: "rgba(75,192,192,1)",
               data: Array.from(Array(11).keys()).map((i) =>
                 calculateWACC(
@@ -285,11 +337,28 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           ),
           datasets: [
             {
+              label: "Current WACC",
+              pointRadius: 4,
+              pointBackgroundColor: "rgba(0,150,192,1)",
+              data: [
+                {
+                  x: project.costOfDebt,
+                  y: calculateWACC(
+                    project.equity,
+                    costOfEquity,
+                    project.debt,
+                    project.costOfDebt,
+                    project.tax
+                  ),
+                },
+              ],
+            },
+            {
               label: "WACC",
               borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
               backgroundColor: "rgba(75,192,192,0)",
-              pointRadius: 2,
+              pointRadius: 1,
               pointBackgroundColor: "rgba(75,192,192,1)",
               data: Array.from(Array(11).keys()).map((i) =>
                 calculateWACC(
@@ -360,11 +429,28 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
           ),
           datasets: [
             {
+              label: "Current WACC",
+              pointRadius: 4,
+              pointBackgroundColor: "rgba(0,150,192,1)",
+              data: [
+                {
+                  x: project.tax,
+                  y: calculateWACC(
+                    project.equity,
+                    costOfEquity,
+                    project.debt,
+                    project.costOfDebt,
+                    project.tax
+                  ),
+                },
+              ],
+            },
+            {
               label: "WACC",
               borderWidth: 1,
               borderColor: "rgba(75,192,192,1)",
               backgroundColor: "rgba(75,192,192,0)",
-              pointRadius: 2,
+              pointRadius: 1,
               pointBackgroundColor: "rgba(75,192,192,1)",
               data: Array.from(Array(11).keys()).map((i) =>
                 calculateWACC(
