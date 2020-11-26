@@ -75,6 +75,17 @@ const Landing = () => {
           </li>
           <li>Secure login with auth0</li>
         </ul>
+        <h6 className="mt-5">Getting Started</h6>
+        <ol>
+          <li>Sign up with username & password or Google login</li>
+          <li>Create your first project</li>
+          <li>
+            Analyze the project, add additional projects or browse the
+            application
+          </li>
+        </ol>
+        <h6 className="mt-5">Do you have questions or feedback?</h6>
+        <p>Feel free to send us an email at contact@pureokrs.com.</p>
       </Jumbotron>
     </div>
   );
