@@ -10,7 +10,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import NavBar from "./components/NavBar";
 import Landing from "./components/Landing";
 import Footer from "./components/Footer";
-import WACCCalculator from "./components/ProjectTool/WACCCalculator";
 import AdminTool from "./components/AdminTool/AdminTool";
 import ProjectTool from "./components/ProjectTool/ProjectTool";
 import ProjectList from "./components/ProjectList";
@@ -20,6 +19,7 @@ import { getBetas } from "./services/BetaService";
 import { getMarketReturns } from "./services/MarketReturnService";
 import Analysis from "./components/Analysis";
 import { IProject } from "./models/Project";
+import Data from "./components/Data";
 
 const defaultProject: IProject = {
   name: "",
@@ -64,7 +64,14 @@ function App() {
             riskFreeRates={riskFreeRates}
             setProject={setProject}
           />
-          <PrivateRoute path="/calculator" component={WACCCalculator} />
+          <PrivateRoute
+            path="/analysis"
+            component={Analysis}
+            project={project}
+            betas={betas}
+            marketReturns={marketReturns}
+            riskFreeRates={riskFreeRates}
+          />
           <PrivateRoute
             path="/admin"
             component={AdminTool}
@@ -75,16 +82,19 @@ function App() {
             riskFreeRates={riskFreeRates}
             setRiskFreeRates={setRiskFreeRates}
           />
-          <PrivateRoute
-            path="/analysis"
-            component={Analysis}
-            project={project}
-            betas={betas}
-            marketReturns={marketReturns}
-            riskFreeRates={riskFreeRates}
+          <Route
+            path="/data"
+            render={(props: any) => (
+              <Data
+                betas={betas || []}
+                marketReturns={marketReturns || []}
+                riskFreeRates={riskFreeRates || []}
+              />
+            )}
           />
           <Route path="/about" component={About} />
           <Route path="/login" render={() => loginWithRedirect()} />
+          <Route path="/*" component={Landing} />
         </Switch>
       </Container>
       <Footer />
