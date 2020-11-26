@@ -20,6 +20,7 @@ import { getMarketReturns } from "./services/MarketReturnService";
 import Analysis from "./components/Analysis";
 import { IProject } from "./models/Project";
 import Data from "./components/Data";
+import CookieConsent from "react-cookie-consent";
 
 const defaultProject: IProject = {
   name: "",
@@ -98,6 +99,18 @@ function App() {
         </Switch>
       </Container>
       <Footer />
+      <CookieConsent
+        disableStyles={true}
+        style={{
+          backgroundColor: "#212529",
+          position: "sticky",
+          bottom: 0,
+        }}
+        buttonClasses="btn btn-warning btn-sm"
+        containerClasses="col-lg-12 d-flex flex-row justify-content-between p-4"
+      >
+        <small>Pure WACC is using cookies to improve the user exprience.</small>
+      </CookieConsent>
     </Router>
   );
 }
