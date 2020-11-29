@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { IProject } from "../../models/Project";
 import { IRiskFreeRate } from "../../models/RiskFreeRate";
 import ProjectName from "./ProjectName";
-import SetRiskFreeRate from "./SetRiskFreeRate";
+import RiskFreeRate from "./RiskFreeRate";
 
 interface IProps {
   project: IProject;
@@ -13,6 +13,15 @@ interface IProps {
 }
 
 const InitProject = ({ project, handleInputChange, rfRates }: IProps) => {
+  const [riskFreeRate, setRiskFreeRate] = useState<number>();
+
+  useEffect(() => {
+    if (rfRates && project.rfId)
+      setRiskFreeRate(
+        rfRates.find((rf: IRiskFreeRate) => rf._id === project.rfId)?.rate
+      );
+  }, [project.rfId, rfRates]);
+
   return (
     <>
       <h5 className="my-4">Project Setup</h5>
@@ -26,23 +35,20 @@ const InitProject = ({ project, handleInputChange, rfRates }: IProps) => {
       </Form.Row>
       <Form.Row>
         <Col sm={4} md={2}>
-          <SetRiskFreeRate
+          <RiskFreeRate
             project={project}
             handleInputChange={handleInputChange}
             rfRates={rfRates}
           />
         </Col>
-        <Col className="text-right" sm={4} md={4}>
-          <Form.Label>Risk Free Rate</Form.Label>
-          <Form.Text>
-            <h3>
-              {
-                rfRates.find((rf: IRiskFreeRate) => rf._id === project.rfId)
-                  ?.rate
-              }
-            </h3>
-          </Form.Text>
-        </Col>
+        {riskFreeRate && (
+          <Col className="text-right" sm={4} md={4}>
+            <Form.Label>Risk Free Rate</Form.Label>
+            <Form.Text>
+              <h3>{(riskFreeRate * 100).toFixed(2) + "%"}</h3>
+            </Form.Text>
+          </Col>
+        )}
       </Form.Row>
     </>
   );

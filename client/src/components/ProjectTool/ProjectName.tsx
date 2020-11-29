@@ -13,9 +13,6 @@ const ProjectName = (props: { project: IProject; handleInputChange: any }) => {
         value={props.project.name}
         onChange={props.handleInputChange}
       ></Form.Control>
-      <Form.Text className="text-muted">
-        Enter a name for your new project.
-      </Form.Text>
     </Form.Group>
   );
 };

@@ -13,6 +13,7 @@ interface IProps {
   marketReturns: IMarketReturn[];
   riskFreeRates: IRiskFreeRate[];
   setProject: any;
+  riskFreeRate?: IRiskFreeRate;
 }
 
 const defaultProjects: IProject[] = [];
@@ -22,6 +23,7 @@ const ProjectList = ({
   marketReturns,
   riskFreeRates,
   setProject,
+  riskFreeRate,
 }: IProps) => {
   const { getAccessTokenSilently } = useAuth0();
   const [token, setToken] = useState("");
@@ -50,6 +52,7 @@ const ProjectList = ({
             betas={betas}
             marketReturns={marketReturns}
             riskFreeRates={riskFreeRates}
+            riskFreeRate={riskFreeRate}
           />
         ))}
     </>

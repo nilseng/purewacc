@@ -4,14 +4,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { IProject } from "../../models/Project";
 import { calculateWACC } from "../../services/CalculationService";
+import { IRiskFreeRate } from "../../models/RiskFreeRate";
 
 interface IProps {
   project: IProject;
   Re: number;
+  riskFreeRate: IRiskFreeRate;
   handleInputChange: any;
 }
 
-const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
+const WACC = ({ project, Re, riskFreeRate, handleInputChange }: IProps) => {
   const [WACC, setWACC] = useState(0);
 
   useEffect(() => {
@@ -32,7 +34,12 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
       <Form.Row>
         <Col sm={4} md={2}>
           <Form.Group>
-            <Form.Label>Equity</Form.Label>
+            <Form.Label>
+              Equity{" "}
+              {riskFreeRate && (
+                <span className="text-muted">[{riskFreeRate.currency}]</span>
+              )}
+            </Form.Label>
             <Form.Control
               name="equity"
               type="number"
@@ -49,14 +56,19 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
         <Col sm={4} md={2}>
           <Form.Group className="text-right text-muted">
             <Form.Label>Cost of Equity</Form.Label>
-            <h2>{Re.toFixed(3)}</h2>
+            <h2>{(Re * 100).toFixed(2) + "%"}</h2>
           </Form.Group>
         </Col>
       </Form.Row>
       <Form.Row>
         <Col sm={4} md={2}>
           <Form.Group>
-            <Form.Label>Debt</Form.Label>
+            <Form.Label>
+              Debt{" "}
+              {riskFreeRate && (
+                <span className="text-muted">[{riskFreeRate.currency}]</span>
+              )}
+            </Form.Label>
             <Form.Control
               name="debt"
               type="number"
@@ -69,19 +81,24 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
         </Col>
         <Col sm={4} md={2}></Col>
         <Col sm={4} md={2}>
-          <Form.Group className="text-right text-muted">
-            <Form.Label>Cost of Debt</Form.Label>
+          <Form.Group className="text-right">
+            <Form.Label>
+              Cost of Debt <span className="text-muted">[%]</span>
+            </Form.Label>
             <Form.Control
               name="costOfDebt"
               type="number"
               value={
                 !project.costOfDebt && project.costOfDebt !== 0
                   ? ""
-                  : project.costOfDebt
+                  : project.costOfDebt * 100
               }
               size="sm"
               required
-              onChange={handleInputChange}
+              onChange={(e) => {
+                e.target.value = +e.target.value / 100 + "";
+                handleInputChange(e);
+              }}
             ></Form.Control>
           </Form.Group>
         </Col>
@@ -89,30 +106,30 @@ const WACCCalculator = ({ project, Re, handleInputChange }: IProps) => {
       <Form.Row>
         <Col sm={4} md={2}>
           <Form.Group>
-            <Form.Label>Tax Rate</Form.Label>
+            <Form.Label>
+              Tax Rate <span className="text-muted">[%]</span>
+            </Form.Label>
             <Form.Control
               name="tax"
               type="number"
-              value={!project.tax && project.tax !== 0 ? "" : project.tax}
+              value={!project.tax && project.tax !== 0 ? "" : project.tax * 100}
               size="sm"
               required
-              onChange={handleInputChange}
+              onChange={(e) => {
+                e.target.value = +e.target.value / 100 + "";
+                handleInputChange(e);
+              }}
             ></Form.Control>
           </Form.Group>
         </Col>
       </Form.Row>
       <Row className="text-right">
         <Col sm={12} md={6} className="border-top border-dark py-4">
-          WACC{" "}
-          <h2>
-            {!isNaN(WACC)
-              ? WACC.toFixed(3).toLocaleString()
-              : (0).toFixed(3).toLocaleString()}
-          </h2>
+          WACC <h2>{(WACC * 100).toFixed(2) + "%"}</h2>
         </Col>
       </Row>
     </>
   );
 };
 
-export default WACCCalculator;
+export default WACC;

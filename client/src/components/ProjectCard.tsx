@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -26,6 +26,7 @@ interface IProps {
   setProject?: any;
   projects?: IProject[];
   setProjects?: any;
+  riskFreeRate?: IRiskFreeRate;
 }
 
 const ProjectCard = ({
@@ -38,6 +39,10 @@ const ProjectCard = ({
   setProjects,
 }: IProps) => {
   const { getAccessTokenSilently } = useAuth0();
+
+  const [riskFreeRate, setRiskFreeRate] = useState<IRiskFreeRate>();
+  const [costOfEquity, setCostOfEquity] = useState<number>();
+  const [WACC, setWACC] = useState<number>();
 
   const onAnalyse = (project: IProject) => {
     setProject(project);
@@ -60,6 +65,20 @@ const ProjectCard = ({
 
   const history = useHistory();
 
+  useEffect(() => {
+    setRiskFreeRate(riskFreeRates.find((rf) => rf._id === project.rfId));
+  }, [project, riskFreeRates]);
+
+  useEffect(() => {
+    setCostOfEquity(
+      calculateCostOfEquity(project, riskFreeRates, betas, marketReturns)
+    );
+  }, [project, riskFreeRates, betas, marketReturns]);
+
+  useEffect(() => {
+    setWACC(calculateProjectWACC(project, riskFreeRates, betas, marketReturns));
+  }, [project, riskFreeRates, betas, marketReturns]);
+
   return (
     <Card
       key={project._id}
@@ -73,27 +92,31 @@ const ProjectCard = ({
       </Row>
       <Row className="my-2">
         <Col className="d-flex flex-direction-row">
-          <b>
-            WACC ={" "}
-            {calculateProjectWACC(project, riskFreeRates, betas, marketReturns)
-              ?.toFixed(3)
-              ?.toLocaleString()}
-          </b>
+          <b>WACC = {WACC ? (WACC * 100).toFixed(2) : "?"} %</b>
         </Col>
       </Row>
       <Row className="text-muted">
-        <Col sm={3}>Equity = {project.equity}</Col>
+        <Col sm={3}>
+          Equity = {project.equity}{" "}
+          {riskFreeRate && <span>{riskFreeRate.currency}</span>}
+        </Col>
         <Col sm={3}>
           Cost of Equity ={" "}
-          {calculateCostOfEquity(project, riskFreeRates, betas, marketReturns)
-            ?.toFixed(3)
-            ?.toLocaleString()}
+          {costOfEquity ? (costOfEquity * 100)?.toFixed(2) : "?"} %
         </Col>
       </Row>
       <Row className="text-muted">
-        <Col sm={3}>Debt = {project.debt}</Col>
-        <Col sm={3}>Cost of Debt = {project.costOfDebt}</Col>
-        <Col sm={3}>Corporate Tax = {project.tax}</Col>
+        <Col sm={3}>
+          Debt = {project.debt}{" "}
+          {riskFreeRate && <span>{riskFreeRate.currency}</span>}
+        </Col>
+        <Col sm={3}>
+          Cost of Debt ={" "}
+          {project.costOfDebt ? (project.costOfDebt * 100).toFixed(2) : "?"} %
+        </Col>
+        <Col sm={3}>
+          Corporate Tax = {project.tax ? (project.tax * 100).toFixed(2) : "?"} %
+        </Col>
       </Row>
       {setProject && (
         <Row>

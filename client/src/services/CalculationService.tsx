@@ -52,5 +52,7 @@ export const calculateCostOfEquity = (
       branch.weight * beta.beta * (marketReturn.return - rfRate.rate);
     sumOfWeights += branch.weight;
   });
-  return rfRate.rate + tempProductSum / sumOfWeights;
+  return sumOfWeights
+    ? rfRate.rate + tempProductSum / sumOfWeights
+    : rfRate.rate;
 };

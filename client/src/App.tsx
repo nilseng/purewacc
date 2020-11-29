@@ -21,6 +21,9 @@ import Analysis from "./components/Analysis";
 import { IProject } from "./models/Project";
 import Data from "./components/Data";
 import CookieConsent from "react-cookie-consent";
+import { IBeta } from "./models/Beta";
+import { IMarketReturn } from "./models/MarketReturn";
+import { IRiskFreeRate } from "./models/RiskFreeRate";
 
 const defaultProject: IProject = {
   name: "",
@@ -31,9 +34,11 @@ function App() {
   const { loginWithRedirect } = useAuth0();
 
   const [project, setProject] = useState(defaultProject);
-  const [betas, setBetas] = useState();
-  const [marketReturns, setMarketReturns] = useState();
-  const [riskFreeRates, setRiskFreeRates] = useState();
+  const [betas, setBetas] = useState<IBeta[]>();
+  const [marketReturns, setMarketReturns] = useState<IMarketReturn[]>();
+  const [riskFreeRates, setRiskFreeRates] = useState<IRiskFreeRate[]>();
+
+  const [riskFreeRate, setRiskFreeRate] = useState<IRiskFreeRate>();
 
   const resetProject = () => {
     setProject(defaultProject);
@@ -44,6 +49,10 @@ function App() {
     getMarketReturns().then((mrs) => setMarketReturns(mrs));
     getRiskFreeRates().then((rfRates) => setRiskFreeRates(rfRates));
   }, []);
+
+  useEffect(() => {
+    setRiskFreeRate(riskFreeRates?.find((rf) => rf._id === project.rfId));
+  }, [riskFreeRates, project]);
 
   return (
     <Router history={history}>
@@ -56,6 +65,7 @@ function App() {
             component={ProjectTool}
             project={project}
             setProject={setProject}
+            riskFreeRate={riskFreeRate}
           />
           <PrivateRoute
             path="/projects"
@@ -109,7 +119,9 @@ function App() {
         buttonClasses="btn btn-warning btn-sm"
         containerClasses="col-lg-12 d-flex flex-row justify-content-between p-4"
       >
-        <small>Pure WACC is using cookies to improve the user exprience.</small>
+        <small>
+          Pure WACC is using cookies to improve the user experience.
+        </small>
       </CookieConsent>
     </Router>
   );

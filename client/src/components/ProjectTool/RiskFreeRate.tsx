@@ -9,7 +9,7 @@ interface IProps {
   rfRates: IRiskFreeRate[];
 }
 
-const SetRiskFreeRate = ({ project, handleInputChange, rfRates }: IProps) => {
+const RiskFreeRate = ({ project, handleInputChange, rfRates }: IProps) => {
   return (
     <Form.Group>
       <Form.Label>Currency</Form.Label>
@@ -23,11 +23,12 @@ const SetRiskFreeRate = ({ project, handleInputChange, rfRates }: IProps) => {
         <option disabled value="default">
           Select
         </option>
-        {rfRates.map((rf: IRiskFreeRate) => (
-          <option key={rf._id} value={rf._id}>
-            {rf.currency}
-          </option>
-        ))}
+        {rfRates &&
+          rfRates.map((rf: IRiskFreeRate) => (
+            <option key={rf._id} value={rf._id}>
+              {rf.currency}
+            </option>
+          ))}
       </Form.Control>
       <Form.Text className="text-muted">
         The currency will be used to set the risk free rate.
@@ -36,4 +37,4 @@ const SetRiskFreeRate = ({ project, handleInputChange, rfRates }: IProps) => {
   );
 };
 
-export default SetRiskFreeRate;
+export default RiskFreeRate;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
@@ -21,14 +21,29 @@ interface IProps {
   betas: IBeta[];
   marketReturns: IMarketReturn[];
   riskFreeRates: IRiskFreeRate[];
+  riskFreeRate: IRiskFreeRate;
 }
 
-const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
-  const [costOfEquity] = useState(
-    project
-      ? calculateCostOfEquity(project, riskFreeRates, betas, marketReturns)
-      : undefined
+const Analysis = ({
+  project,
+  betas,
+  marketReturns,
+  riskFreeRates,
+  riskFreeRate,
+}: IProps) => {
+  const [costOfEquity, setCostOfEquity] = useState(
+    calculateCostOfEquity(project, riskFreeRates, betas, marketReturns)
   );
+
+  useEffect(() => {
+    setCostOfEquity(
+      calculateCostOfEquity(project, riskFreeRates, betas, marketReturns)
+    );
+  }, [project, riskFreeRates, betas, marketReturns]);
+
+  useEffect(() => {
+    console.log(project);
+  }, [project]);
 
   const toolTipConfig = {
     callbacks: {
@@ -240,9 +255,13 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
   const costOfEquityChartConfig = project
     ? {
         data: {
-          labels: Array.from(Array(11).keys()).map(
-            (i) => ((costOfEquity || 0) * i * 2) / 10
-          ),
+          labels: Array.from(Array(11).keys()).map((i) => {
+            console.log(costOfEquity?.toFixed(3));
+            console.log(
+              costOfEquity ? +((costOfEquity * i * 2) / 10).toFixed(3) : 0
+            );
+            return costOfEquity ? +((costOfEquity * i * 2) / 10).toFixed(3) : 0;
+          }),
           datasets: [
             {
               label: "Current WACC",
@@ -250,14 +269,14 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
               pointBackgroundColor: "rgba(0,150,192,1)",
               data: [
                 {
-                  x: costOfEquity,
+                  x: costOfEquity ? +costOfEquity?.toFixed(3) : undefined,
                   y: calculateWACC(
                     project.equity,
                     costOfEquity,
                     project.debt,
                     project.costOfDebt,
                     project.tax
-                  ),
+                  ).toFixed(3),
                 },
               ],
             },
@@ -533,6 +552,7 @@ const Analysis = ({ project, betas, marketReturns, riskFreeRates }: IProps) => {
               betas={betas}
               marketReturns={marketReturns}
               riskFreeRates={riskFreeRates}
+              riskFreeRate={riskFreeRate}
             />
           )}
         </Col>
