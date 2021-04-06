@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
 import { Switch, Route, Router } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { v4 as uuidv4 } from "uuid";
@@ -57,7 +56,7 @@ function App() {
   return (
     <Router history={history}>
       <NavBar resetProject={resetProject} />
-      <Container style={{ minHeight: "calc(100vh - 260px)" }}>
+      <div style={{ minHeight: "calc(100vh - 260px)" }}>
         <Switch>
           <Route path="/" exact component={Landing} />
           <PrivateRoute
@@ -107,7 +106,7 @@ function App() {
           <Route path="/login" render={() => loginWithRedirect()} />
           <Route path="/*" component={Landing} />
         </Switch>
-      </Container>
+      </div>
       <Footer />
       <CookieConsent
         disableStyles={true}

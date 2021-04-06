@@ -7,6 +7,7 @@ import { IRiskFreeRate } from "../models/RiskFreeRate";
 import { IBeta } from "../models/Beta";
 import { IMarketReturn } from "../models/MarketReturn";
 import ProjectCard from "./ProjectCard";
+import Container from "react-bootstrap/Container";
 
 interface IProps {
   betas: IBeta[];
@@ -39,7 +40,7 @@ const ProjectList = ({
   }, [token]);
 
   return (
-    <>
+    <Container>
       <h5>Projects</h5>
       {projects &&
         projects.map((project: IProject) => (
@@ -55,7 +56,7 @@ const ProjectList = ({
             riskFreeRate={riskFreeRate}
           />
         ))}
-    </>
+    </Container>
   );
 };
 

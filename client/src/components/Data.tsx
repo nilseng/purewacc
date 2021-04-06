@@ -8,6 +8,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { IBeta } from "../models/Beta";
 import { IMarketReturn } from "../models/MarketReturn";
 import { IRiskFreeRate } from "../models/RiskFreeRate";
+import Container from "react-bootstrap/Container";
 
 interface IProps {
   betas: IBeta[];
@@ -19,7 +20,7 @@ const Data = ({ betas, marketReturns, riskFreeRates }: IProps) => {
   const [key, setKey] = useState("betas");
 
   return (
-    <>
+    <Container>
       <Tabs
         id="controlled-tab-example"
         activeKey={key}
@@ -151,7 +152,7 @@ const Data = ({ betas, marketReturns, riskFreeRates }: IProps) => {
           </Table>
         </Tab>
       </Tabs>
-    </>
+    </Container>
   );
 };
 

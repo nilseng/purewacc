@@ -22,7 +22,7 @@ const NavBar = ({ resetProject }: IProps) => {
   const { isAuthenticated, loginWithRedirect, logout, isLoading } = useAuth0();
 
   return (
-    <Navbar bg="dark" expand="md" collapseOnSelect>
+    <Navbar expand="md" collapseOnSelect>
       <Navbar.Brand className="text-light" href="/">
         <AnimatedLogo height={"2rem"} width={"2rem"} />
         <span className="ml-1">

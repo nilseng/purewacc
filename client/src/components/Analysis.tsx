@@ -15,6 +15,7 @@ import {
 import AnalysisChart, { ChartTypes } from "./AnalysisChart";
 import ProjectCard from "./ProjectCard";
 import { faList } from "@fortawesome/free-solid-svg-icons";
+import Container from "react-bootstrap/Container";
 
 interface IProps {
   project: IProject;
@@ -532,7 +533,7 @@ const Analysis = ({
       }
     : undefined;
   return (
-    <>
+    <Container>
       {!project && (
         <Row>
           <Col>
@@ -586,7 +587,7 @@ const Analysis = ({
           {taxChartConfig && <AnalysisChart config={taxChartConfig} />}
         </Col>
       </Row>
-    </>
+    </Container>
   );
 };
 

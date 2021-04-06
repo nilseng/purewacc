@@ -9,6 +9,7 @@ import Nav from "react-bootstrap/Nav";
 import { IRiskFreeRate } from "../../models/RiskFreeRate";
 import { IBeta } from "../../models/Beta";
 import { IMarketReturn } from "../../models/MarketReturn";
+import Container from "react-bootstrap/Container";
 
 interface IProps {
   betas: IBeta[];
@@ -28,7 +29,7 @@ const AdminTool = ({
   setRiskFreeRates,
 }: IProps) => {
   return (
-    <>
+    <Container>
       <Nav>
         <Link
           to="/admin/risk-free-rates"
@@ -63,7 +64,7 @@ const AdminTool = ({
           setMarketReturns={setMarketReturns}
         />
       </Switch>
-    </>
+    </Container>
   );
 };
 

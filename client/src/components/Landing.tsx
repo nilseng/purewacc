@@ -1,9 +1,12 @@
 import React from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import AnalysisChart, { ChartTypes } from "./AnalysisChart";
+
+import "./Landing.scss";
+import Container from "react-bootstrap/Container";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const chartConfig = {
   data: {
@@ -42,52 +45,64 @@ const chartConfig = {
 };
 
 const Landing = () => {
+  const { height } = useWindowDimensions();
+
   return (
-    <div className="py-4">
-      <Jumbotron className="bg-dark">
-        <span className="h4">Welcome to Pure WACC</span>
-        <span className="h6 font-italic text-primary ml-2">BETA</span>
-        <h6 className="mt-4">Features</h6>
-        <ul className="mt-2">
-          <li>
-            Calculate cost of capital for multi industry and multi market
-            projects
-          </li>
-          <li>High quality betas, equity risk premiums and other data</li>
-          <li>
-            Analytics and insights
-            <Row className="my-4">
-              <Col md={4}>
-                <AnalysisChart
-                  chartType={ChartTypes.Doughnut}
-                  config={chartConfig}
-                  height={80}
-                />
-              </Col>
-              <Col md={4}>
-                <AnalysisChart
-                  chartType={ChartTypes.Bar}
-                  config={chartConfig}
-                  height={80}
-                />
-              </Col>
-            </Row>
-          </li>
-          <li>Secure login with auth0</li>
-        </ul>
-        <h6 className="mt-5">Getting Started</h6>
-        <ol>
-          <li>Sign up with username & password or Google login</li>
-          <li>Create your first project</li>
-          <li>
-            Analyze the project, add additional projects or browse the
-            application
-          </li>
-        </ol>
-        <h6 className="mt-5">Do you have questions or feedback?</h6>
-        <p>Feel free to send us an email at contact@pureokrs.com.</p>
-      </Jumbotron>
-    </div>
+    <>
+      <div
+        className="landing-heading d-flex align-items-center justify-content-center vh-80 py-4"
+        style={{ height: height * 0.6 }}
+      >
+        <div>
+          <span className="display-4">Welcome to Pure WACC</span>
+          <span className="h6 font-italic text-primary ml-2">BETA</span>
+        </div>
+      </div>
+      <Container className="d-flex justify-content-center py-4">
+        <div>
+          <h6 className="mt-4">Features</h6>
+          <ul className="mt-2">
+            <li className="my-2">
+              Calculate cost of capital for multi industry and multi market
+              projects
+            </li>
+            <li className="my-2">
+              High quality betas, equity risk premiums and other data
+            </li>
+            <li className="my-2">
+              Analytics and insights
+              <Row className="my-4">
+                <Col md={4}>
+                  <AnalysisChart
+                    chartType={ChartTypes.Doughnut}
+                    config={chartConfig}
+                    height={80}
+                  />
+                </Col>
+                <Col md={4}>
+                  <AnalysisChart
+                    chartType={ChartTypes.Bar}
+                    config={chartConfig}
+                    height={80}
+                  />
+                </Col>
+              </Row>
+            </li>
+          </ul>
+          <h6 className="mt-5">Getting Started</h6>
+          <ol>
+            <li className="my-2">
+              Sign up with username & password or Google login
+            </li>
+            <li className="my-2">Create your first project</li>
+            <li className="my-2">
+              Analyze the project, add additional projects or browse the
+              application
+            </li>
+          </ol>
+        </div>
+      </Container>
+    </>
   );
 };
 

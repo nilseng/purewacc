@@ -1,9 +1,10 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import Container from "react-bootstrap/Container";
 
 const About = () => {
   return (
-    <div className="py-4">
+    <Container className="py-4">
       <Card className="my-4 p-4" bg="dark">
         <h5>What is Pure WACC?</h5>
         <p>
@@ -38,7 +39,7 @@ const About = () => {
           </li>
         </ul>
       </Card>
-    </div>
+    </Container>
   );
 };
 

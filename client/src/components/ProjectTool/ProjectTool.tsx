@@ -22,6 +22,7 @@ import { calculateCostOfEquity } from "../../services/CalculationService";
 import { IRiskFreeRate } from "../../models/RiskFreeRate";
 import { IBeta } from "../../models/Beta";
 import { IMarketReturn } from "../../models/MarketReturn";
+import Container from "react-bootstrap/Container";
 
 const projectProcess = ["initProject", "costOfEquity", "WACC"];
 
@@ -82,7 +83,7 @@ const ProjectTool = ({ project, setProject, riskFreeRate }: IProps) => {
   }, [project, rfRates, betas, marketReturns]);
 
   return (
-    <>
+    <Container>
       <ProcessBar steps={projectProcess} currentStep={currentStep} />
       {/* 1. Initialize project with name and currency */}
       {projectProcess[currentStep] === "initProject" && (
@@ -145,7 +146,7 @@ const ProjectTool = ({ project, setProject, riskFreeRate }: IProps) => {
           Save <FaIcon className="ml-2" icon={faCheck} />
         </Button>
       )}
-    </>
+    </Container>
   );
 };
 
