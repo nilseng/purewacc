@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Created with Vectornator for iOS (http://vectornator.io/) --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" xmlns:vectornator="http://vectornator.io" version="1.1" viewBox="0 0 2732 2048">
+<metadata>
+<vectornator:setting key="DisplayWhiteBackground" value="0"/>
+<vectornator:setting key="RulersVisible" value="1"/>
+<vectornator:setting key="Units" value="Pixels"/>
+<vectornator:setting key="New" value="1"/>
+<vectornator:setting key="DynamicGuides" value="0"/>
+<vectornator:setting key="GuidesVisible" value="1"/>
+<vectornator:setting key="SnapToPoints" value="0"/>
+<vectornator:setting key="SnapToGrid" value="0"/>
+<vectornator:setting key="SnapToGuides" value="1"/>
+<vectornator:setting key="DimensionsVisible" value="1"/>
+<vectornator:setting key="SnapToEdges" value="0"/>
+</metadata>
+<defs>
+<linearGradient y1="1035" id="LinearGradient" x1="14.1622" y2="1035" x2="2608" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1 0 0 1 41 34)">
+<stop stop-color="#282a36" offset="0"/>
+<stop stop-color="#651f1f" offset="1"/>
+</linearGradient>
+</defs>
+<g id="Background" vectornator:layerName="Background">
+<path d="M55.1622+157L2649+157L2649+1981L55.1622+1981L55.1622+157Z" opacity="1" fill="url(#LinearGradient)"/>
+</g>
+<g id="Layer 2" vectornator:layerName="Layer 2">
+<path stroke="#ffffff" stroke-opacity="0.696566" stroke-width="1" d="M9.27273+629.455C9.27273+629.455+1157.15+916.19+991.364+1998.82" fill="none" stroke-linecap="round" opacity="0.9" stroke-linejoin="round"/>
+<path stroke="#ffffff" stroke-opacity="0.696566" stroke-width="1" d="M2087+107C1815.2+419.393+1384.49+1855.38+2669.36+1138.82" fill="none" stroke-linecap="round" opacity="0.9" stroke-linejoin="round"/>
+<path stroke="#ffffff" stroke-opacity="0.696566" stroke-width="1.21823" d="M8.26686+1241.52C8.26686+1241.52+1672.56+1730.44+1399+112" fill="none" stroke-linecap="round" opacity="1" stroke-linejoin="round"/>
+</g>
+</svg>
