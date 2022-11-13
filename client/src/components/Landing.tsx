@@ -1,12 +1,11 @@
 import React from "react";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
-import AnalysisChart, { ChartTypes } from "./AnalysisChart";
-
-import "./Landing.scss";
 import Container from "react-bootstrap/Container";
+import { Bar, Doughnut } from "react-chartjs-2";
 import useWindowDimensions from "../hooks/useWindowDimensions";
+import "./Landing.scss";
 
 const chartConfig = {
   data: {
@@ -23,23 +22,19 @@ const chartConfig = {
     ],
   },
   options: {
-    legend: {
-      display: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
     },
     scales: {
-      xAxes: [
-        {
-          display: false,
-        },
-      ],
-      yAxes: [
-        {
-          display: false,
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
+      xAxis: {
+        display: false,
+      },
+      yAxis: {
+        display: false,
+        suggestedMin: 0,
+      },
     },
   },
 };
@@ -62,43 +57,25 @@ const Landing = () => {
         <div>
           <h6 className="mt-4">Features</h6>
           <ul className="mt-2">
-            <li className="my-2">
-              Calculate cost of capital for multi industry and multi market
-              projects
-            </li>
-            <li className="my-2">
-              High quality betas, equity risk premiums and other data
-            </li>
+            <li className="my-2">Calculate cost of capital for multi industry and multi market projects</li>
+            <li className="my-2">High quality betas, equity risk premiums and other data</li>
             <li className="my-2">
               Analytics and insights
               <Row className="my-4">
                 <Col md={4}>
-                  <AnalysisChart
-                    chartType={ChartTypes.Doughnut}
-                    config={chartConfig}
-                    height={80}
-                  />
+                  <Doughnut data={chartConfig.data} options={chartConfig.options} height={80} />
                 </Col>
                 <Col md={4}>
-                  <AnalysisChart
-                    chartType={ChartTypes.Bar}
-                    config={chartConfig}
-                    height={80}
-                  />
+                  <Bar data={chartConfig.data} options={chartConfig.options} height={80} />
                 </Col>
               </Row>
             </li>
           </ul>
           <h6 className="mt-5">Getting Started</h6>
           <ol>
-            <li className="my-2">
-              Sign up with username & password or Google login
-            </li>
+            <li className="my-2">Sign up with username & password or Google login</li>
             <li className="my-2">Create your first project</li>
-            <li className="my-2">
-              Analyze the project, add additional projects or browse the
-              application
-            </li>
+            <li className="my-2">Analyze the project, add additional projects or browse the application</li>
           </ol>
         </div>
       </Container>
